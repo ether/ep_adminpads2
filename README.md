@@ -1,7 +1,11 @@
 # Administrate Etherpads
 ===========
 
-![Screen shot](https://raw.githubusercontent.com/spcsser/ep_adminpads/master/docs/img/preview.png)
+![Screen shot](docs/img/preview.png)
 
-Plugin for etherpad for admins to list, search and delete pads. The route is `admin/pads`
+Etherpad plugin for admins to list, search, and delete pads. The route
+is `admin/pads`.
 
+This is a fork of
+[ep_adminpads](https://github.com/spcsser/ep_adminpads), which is no
+longer maintained.

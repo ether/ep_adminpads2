@@ -1,18 +1,15 @@
 {
-  "name": "ep_adminpads",
-  "version": "0.0.13",
-  "license": "MIT",
-  "description": "Gives the ability to list and administrate all pads on admin page",
-  "author": "spcsser (Swen Jung) <spcsser@mailto.myendoftheinter.net>",
-  "engines": {
-    "node": ">=8.9.0",
-    "npm": ">=5.5.1"
-  },
+  "name": "ep_adminpads2",
+  "version": "0.0.0",
+  "description": "Etherpad plugin to list and delete pads in /admin.",
+  "homepage": "https://github.com/rhansen/ep_adminpads2",
   "bugs": {
-    "url": "https://github.com/spcsser/ep_adminpads/issues"
+    "url": "https://github.com/rhansen/ep_adminpads2/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/spcsser/ep_adminpads"
-  }
+    "url": "https://github.com/rhansen/ep_adminpads2.git"
+  },
+  "main": "index.js",
+  "license": "MIT"
 }

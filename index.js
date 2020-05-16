@@ -91,7 +91,7 @@ exports.registerRoute = async function (hook_name, args) {
         let render_args = {
             errors: []
         };
-        res.send(eejs.require("ep_adminpads/templates/admin/pads.html", render_args));
+        res.send(eejs.require("ep_adminpads2/templates/admin/pads.html", render_args));
     });
 };
 
