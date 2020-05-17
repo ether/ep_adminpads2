@@ -1,9 +1,9 @@
-exports.documentReady = async function(hooks, context) {
+exports.documentReady = function(hooks, context, cb) {
     if (context !== "admin/pads") {
-        return;
+        return cb;
     }
 
-    let socket,
+    var socket,
         loc = document.location,
         port = loc.port == "" ? (loc.protocol == "https:" ? 443 : 80) : loc.port,
         url = loc.protocol + "//" + loc.hostname + ":" + port + "/",
@@ -12,9 +12,9 @@ exports.documentReady = async function(hooks, context) {
         baseURL = pathComponents.slice(0, pathComponents.length - 2).join("/") + "/",
         resource = baseURL.substring(1) + "socket.io";
 
-    let room = url + "pluginfw/admin/pads";
+    var room = url + "pluginfw/admin/pads";
 
-    let changeTimer;
+    var changeTimer;
 
     //connect
     socket = io.connect(room, {path: baseURL + "socket.io", resource: resource});
@@ -25,42 +25,42 @@ exports.documentReady = async function(hooks, context) {
         limit: 12,
     });
 
-    let doUpdate = false;
-    const doAutoUpdate = function () {
+    var doUpdate = false;
+    var doAutoUpdate = function () {
         return $("#results-autoupdate").prop("checked");
     };
 
-    let search = function () {
+    var search = function () {
         clearTimeout(changeTimer);
         socket.emit("search", $(".search-results").data("query"));
     };
 
-    let htmlEntities = function (padName) {
+    var htmlEntities = function (padName) {
         return $("<div/>").text(padName).html();
     };
 
-    let submitSearch = function () {
-        let query = $(".search-results").data("query");
+    var submitSearch = function () {
+        var query = $(".search-results").data("query");
         query.pattern = $("#search-query")[0].value;
         query.offset = 0;
         search();
     };
 
-    let isInt = function (input) {
+    var isInt = function (input) {
         return typeof input === "number" && input % 1 === 0;
     };
 
-    let formatDate = function (longtime) {
-        let formattedDate = "";
+    var formatDate = function (longtime) {
+        var formattedDate = "";
         if (longtime != null && isInt(longtime)) {
-            let date = new Date(longtime);
-            let month = date.getMonth() + 1;
+            var date = new Date(longtime);
+            var month = date.getMonth() + 1;
             formattedDate = date.getFullYear() + "-" + fillZeros(month) + "-" + fillZeros(date.getDate()) + " " + fillZeros(date.getHours()) + ":" + fillZeros(date.getMinutes()) + ":" + fillZeros(date.getSeconds());
         }
         return formattedDate;
     };
 
-    let fillZeros = function (fillForm) {
+    var fillZeros = function (fillForm) {
         return isInt(fillForm) ? (fillForm < 10 ? "0" + fillForm : fillForm) : "";
     };
 
@@ -85,8 +85,8 @@ exports.documentReady = async function(hooks, context) {
         });
 
         $(".do-delete").off("click").click(function (e) {
-            let row = $(e.target).closest("tr");
-            let padID = row.find(".padname").text();
+            var row = $(e.target).closest("tr");
+            var padID = row.find(".padname").text();
             if (confirm("Do you really want to delete the pad " + padID + "?")) {
                 doUpdate = true;
                 socket.emit("delete", padID);
@@ -94,7 +94,7 @@ exports.documentReady = async function(hooks, context) {
         });
 
         $(".do-prev-page").off("click").click(function (e) {
-            let query = $(".search-results").data("query");
+            var query = $(".search-results").data("query");
             query.offset -= query.limit;
             if (query.offset < 0) {
                 query.offset = 0;
@@ -102,8 +102,8 @@ exports.documentReady = async function(hooks, context) {
             search();
         });
         $(".do-next-page").off("click").click(function (e) {
-            let query = $(".search-results").data("query");
-            let total = $(".search-results").data("total");
+            var query = $(".search-results").data("query");
+            var total = $(".search-results").data("total");
             if (query.offset + query.limit < total) {
                 query.offset += query.limit;
             }
@@ -119,7 +119,7 @@ exports.documentReady = async function(hooks, context) {
 
         $("#progress").data("progress", data.progress);
 
-        let message = "Unknown status";
+        var message = "Unknown status";
         if (data.message) {
             message = "<span class=\"status\">" + data.message.toString() + "</span>";
         }
@@ -142,7 +142,7 @@ exports.documentReady = async function(hooks, context) {
     });
 
     socket.on("search-result", function (data) {
-        let widget = $(".search-results")
+        var widget = $(".search-results")
             , limit = data.query.offset + data.query.limit
         ;
         if (limit > data.total) {
@@ -157,14 +157,14 @@ exports.documentReady = async function(hooks, context) {
         widget.find(".total").html(data.total);
 
         widget.find(".results *").remove();
-        let resultList = widget.find(".results");
+        var resultList = widget.find(".results");
 
         if (data.results.length > 0) {
             data.results.forEach(function (resultset) {
-                let padName = resultset.padName;
-                let lastEdited = resultset.lastEdited;
-                let userCount = resultset.userCount;
-                let row = widget.find(".template tr").clone();
+                var padName = resultset.padName;
+                var lastEdited = resultset.lastEdited;
+                var userCount = resultset.userCount;
+                var row = widget.find(".template tr").clone();
                 row.find(".padname").html("<a href=\"../p/" + encodeURIComponent(padName) + "\">" + htmlEntities(padName) + "</a>"
             )
                 ;
@@ -181,4 +181,5 @@ exports.documentReady = async function(hooks, context) {
 
     socket.emit("load");
     search();
+    return cb;
 };
