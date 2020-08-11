@@ -49,7 +49,11 @@ const search = async (query) => {
   await Promise.all(data.results.map(async (entry) => {
     const pad = await padManager.getPad(entry.padName);
     entry.userCount = api.padUsersCount(entry.padName).padUsersCount;
-    entry.lastEdited = await pad.getLastEdit();
+    try {
+      entry.lastEdited = await pad.getLastEdit();
+    } catch (e) {
+      console.error(`Error retrieving last edited value for pad ${entry.padName}:`, e);
+    }
   }));
   return data;
 };
