@@ -69,16 +69,22 @@ let pads = {
             data.results.push(entrySet);
         });
 
+        let getEdited = [];
         if (data.results.length > 0) {
             data.results.forEach(function (value) {
-                let resultObject = api.getLastEdited(value.padName);
-                value.lastEdited = resultObject.lastEdited;
-                resultObject = api.padUsersCount(value.padName);
-                value.userCount = resultObject.padUsersCount;
+                getEdited.push(
+                    api.getLastEdited(value.padName)
+                        .then((resultObject) => {
+                            value.lastEdited = resultObject.lastEdited;
+                            resultObject = api.padUsersCount(value.padName);
+                            value.userCount = resultObject.padUsersCount;
+                        }));
             });
         } else {
             data.message = 'No results';
         }
+
+        await Promise.all(getEdited);
         return data;
     },
 };
