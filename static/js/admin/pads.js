@@ -32,23 +32,6 @@ exports.documentReady = async (hookName, context) => {
     search();
   };
 
-  const isInt = (input) => typeof input === 'number' && input % 1 === 0;
-
-  const formatDate = (longtime) => {
-    if (longtime == null || !isInt(longtime)) return '';
-    const date = new Date(longtime);
-    const month = date.getMonth() + 1;
-    return (date.getFullYear() +
-            '-' + fillZeros(month) +
-            '-' + fillZeros(date.getDate()) +
-            ' ' +
-            fillZeros(date.getHours()) +
-            ':' + fillZeros(date.getMinutes()) +
-            ':' + fillZeros(date.getSeconds()));
-  };
-
-  const fillZeros = (x) => isInt(x) ? (x < 10 ? '0' + x : x) : '';
-
   const updateHandlers = () => {
     $('#progress.dialog .close').off('click').click(() => $('#progress.dialog').hide());
 
@@ -147,7 +130,7 @@ exports.documentReady = async (hookName, context) => {
         const row = widget.find('#template').clone().removeAttr('id');
         row.find('.padname').empty().append(
             $('<a>').attr('href', `../p/${encodeURIComponent(padName)}`).text(padName));
-        row.find('.last-edited').text(formatDate(lastEdited));
+        row.find('.last-edited').text(lastEdited);
         row.find('.user-count').text(userCount);
         resultList.append(row);
       });

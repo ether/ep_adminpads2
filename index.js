@@ -2,9 +2,35 @@ const $ = require('cheerio');
 const eejs = require('ep_etherpad-lite/node/eejs');
 const padManager = require('ep_etherpad-lite/node/db/PadManager');
 const api = require('ep_etherpad-lite/node/db/API');
+var settings = require('ep_etherpad-lite/node/utils/Settings');
+
+var pluginSettings = settings.ep_adminpads2;
+var formatDateUS = pluginSettings.formatDateUS || false;
 const queryLimit = 12;
 
 const isNumeric = (arg) => typeof arg == 'number' || (typeof arg == 'string' && parseInt(arg));
+
+const isInt = function (input) {
+  return typeof input === "number" && input % 1 === 0;
+};
+
+const formatDate = function (longtime) {
+  console.log('format DateUS: ', formatDateUS);
+  var formattedDate = "";
+  if (longtime != null && isInt(longtime)) {
+    var date = new Date(longtime);
+    var month = date.getMonth() + 1;
+    formattedDate = formatDateUS
+        ? fillZeros(month) + "-" + fillZeros(date.getDate()) + "-" + date.getFullYear() + " " + fillZeros(date.getHours()) + ":" + fillZeros(date.getMinutes()) + ":" + fillZeros(date.getSeconds())
+        : date.getFullYear() + "-" + fillZeros(month) + "-" + fillZeros(date.getDate()) + " " + fillZeros(date.getHours()) + ":" + fillZeros(date.getMinutes()) + ":" + fillZeros(date.getSeconds());
+  }
+  console.log('formatted date: ', formattedDate);
+  return formattedDate;
+};
+
+const fillZeros = function (fillForm) {
+  return isInt(fillForm) ? (fillForm < 10 ? "0" + fillForm : fillForm) : "";
+};
 
 const search = async (query) => {
   const {padIDs} = await padManager.listAllPads();
@@ -50,7 +76,7 @@ const search = async (query) => {
     const pad = await padManager.getPad(entry.padName);
     entry.userCount = api.padUsersCount(entry.padName).padUsersCount;
     try {
-      entry.lastEdited = await pad.getLastEdit();
+      entry.lastEdited = formatDate(await pad.getLastEdit());
     } catch (e) {
       console.error(`Error retrieving last edited value for pad ${entry.padName}:`, e);
     }
