@@ -18,14 +18,13 @@ let pads = {
     },
     _do_search: async function (pads, query) {
         let data = {
-                progress: 1
-                , message: 'Search done.'
-                , query: query
-                , total: pads.length
-            }
-            , maxResult = 0
-            , result = []
-        ;
+            progress: 1,
+            message: 'Search done.',
+            query: query,
+            total: pads.length,
+        },
+            maxResult = 0,
+            result = [];
         if (query['pattern'] != null && query['pattern'] !== '') {
             let pattern = '*' + query.pattern + '*';
             pattern = RegExp.quote(pattern);
@@ -81,13 +80,13 @@ let pads = {
             data.message = 'No results';
         }
         return data;
-    }
+    },
 };
 
 exports.registerRoute = async function (hook_name, args) {
     args.app.get('/admin/pads', function (req, res) {
         let render_args = {
-            errors: []
+            errors: [],
         };
         res.send(eejs.require('ep_adminpads2/templates/admin/pads.html', render_args));
     });
@@ -125,10 +124,9 @@ exports.updatePads = async function (hook_name, args) {
 };
 
 exports.eejsBlock_adminMenu = async function (hook_name, args) {
-    let hasAdminUrlPrefix = (args.content.indexOf('<a href="admin"') !== -1)
-        , hasOneDirDown = (args.content.indexOf('<a href="../') !== -1)
-        , hasTwoDirDown = (args.content.indexOf('<a href="../../') !== -1)
-        , urlPrefix = hasAdminUrlPrefix ? 'admin/' : hasTwoDirDown ? '../../' : hasOneDirDown ? '../' : ''
-    ;
+    let hasAdminUrlPrefix = (args.content.indexOf('<a href="admin"') !== -1),
+        hasOneDirDown = (args.content.indexOf('<a href="../') !== -1),
+        hasTwoDirDown = (args.content.indexOf('<a href="../../') !== -1),
+        urlPrefix = hasAdminUrlPrefix ? 'admin/' : hasTwoDirDown ? '../../' : hasOneDirDown ? '../' : '';
     args.content = args.content + '<li><a href="' + urlPrefix + 'pads">Manage pads</a></li>';
 };
