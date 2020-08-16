@@ -8,7 +8,6 @@ RegExp.quote = function (x) {
 };
 const isNumeric = function (arg) {
     return typeof (arg) == "number" || (typeof (arg) == "string" && parseInt(arg));
-
 };
 
 let pads = {
@@ -27,7 +26,6 @@ let pads = {
             , maxResult = 0
             , result = []
         ;
-
         if (query["pattern"] != null && query["pattern"] !== "") {
             let pattern = "*" + query.pattern + "*";
             pattern = RegExp.quote(pattern);
@@ -132,6 +130,5 @@ exports.eejsBlock_adminMenu = async function (hook_name, args) {
         , hasTwoDirDown = (args.content.indexOf("<a href=\"../../") !== -1)
         , urlPrefix = hasAdminUrlPrefix ? "admin/" : hasTwoDirDown ? "../../" : hasOneDirDown ? "../" : ""
     ;
-
     args.content = args.content + "<li><a href=\"" + urlPrefix + "pads\">Manage pads</a></li>";
 };
