@@ -4,7 +4,7 @@ const api = require('ep_etherpad-lite/node/db/API');
 const queryLimit = 12;
 
 RegExp.quote = function (x) {
-    return x.toString().replace(/[-\\^$*+?.()|[\]{}]/g, '\\$&')
+    return x.toString().replace(/[-\\^$*+?.()|[\]{}]/g, '\\$&');
 };
 const isNumeric = function (arg) {
     return typeof (arg) == 'number' || (typeof (arg) == 'string' && parseInt(arg));
