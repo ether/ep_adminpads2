@@ -55,11 +55,11 @@
     <div id="wrapper">
 
       <% if (errors.length) { %>
-        <div class="errors">
-          <% errors.forEach(function (item) { %>
-            <div class="error"><%= item.toString() %></div>
-          <% }) %>
-        </div>
+      <div class="errors">
+        <% errors.forEach(function (item) { %>
+        <div class="error"><%= item.toString() %></div>
+        <% }) %>
+      </div>
       <% } %>
 
       <div class="menu">
@@ -75,37 +75,37 @@
 
       <div class="innerwrapper">
         <div class="paged listing search-results">
-        <h2>Search for pads</h2>
-        <form name="search-form" id="search-form">
-          <input type="text" name="search" placeholder="Search term" id="search-query">
-          <input type="button" value="Search" id="do-search">
-        </form>
-        <input type="checkbox" name="autoupdate" id="results-autoupdate" title="Enables or disables automatic updates for the current query."><label for="autoupdate">Auto-update on pad changes</label>
-        <table>
-          <thead>
-            <tr>
-              <th>Padname</th>
-              <th>Last edited</th>
-              <th>Pad user count</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody class="template">
-            <tr>
-              <td class="padname"></td>
-              <td class="last-edited"></td>
-              <td class="user-count"></td>
-              <td class="actions">
-                <input type="button" value="Delete" class="do-delete">
-             </td>
-            </tr>
-          </tbody>
-          <tbody class="results">
-          </tbody>
-        </table>
-        <input type="button" value="&lt;&lt;" class="do-prev-page">
-        <span class="offset"></span>..<span class="limit"></span> of <span class="total"></span>.
-        <input type="button" value="&gt;&gt;" class="do-next-page">
+          <h2>Search for pads</h2>
+          <form name="search-form" id="search-form">
+            <input type="text" name="search" placeholder="Search term" id="search-query">
+            <input type="button" value="Search" id="do-search">
+          </form>
+          <input type="checkbox" name="autoupdate" id="results-autoupdate" title="Enables or disables automatic updates for the current query."><label for="autoupdate">Auto-update on pad changes</label>
+          <table>
+            <thead>
+              <tr>
+                <th>Padname</th>
+                <th>Last edited</th>
+                <th>Pad user count</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody class="template">
+              <tr>
+                <td class="padname"></td>
+                <td class="last-edited"></td>
+                <td class="user-count"></td>
+                <td class="actions">
+                  <input type="button" value="Delete" class="do-delete">
+                </td>
+              </tr>
+            </tbody>
+            <tbody class="results">
+            </tbody>
+          </table>
+          <input type="button" value="&lt;&lt;" class="do-prev-page">
+          <span class="offset"></span>..<span class="limit"></span> of <span class="total"></span>.
+          <input type="button" value="&gt;&gt;" class="do-next-page">
       </div>
     </div>
   </body>
