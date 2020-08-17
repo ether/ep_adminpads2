@@ -87,7 +87,7 @@ exports.documentReady = function(hooks, context, cb) {
         $('.do-delete').off('click').click(function (e) {
             var row = $(e.target).closest('tr');
             var padID = row.find('.padname').text();
-            if (confirm('Do you really want to delete the pad ' + padID + '?')) {
+            if (confirm(_('ep_adminpads2_confirm', {padID: padID}) || `Do you really want to delete the pad ${padID}?`)) {
                 doUpdate = true;
                 socket.emit('delete', padID);
             }
@@ -119,7 +119,7 @@ exports.documentReady = function(hooks, context, cb) {
 
         $('#progress').data('progress', data.progress);
 
-        var message = 'Unknown status';
+        var message = _('ep_adminpads2_unknown-status') || 'Unknown status';
         if (data.message) {
             message = '<span class="status">' + data.message.toString() + '</span>';
         }
@@ -173,7 +173,13 @@ exports.documentReady = function(hooks, context, cb) {
                 resultList.append(row);
             });
         } else {
-            resultList.append('<tr><td colspan="4" class="no - results">No results</td></tr>');
+            const noResults = _('ep_adminpads2_no-results') || 'No results';
+            resultList.append(
+                $('<tr>').append(
+                    $('<td>')
+                        .attr('colspan', '4')
+                        .addClass('no - results')
+                        .text(noResults)));
         }
 
         updateHandlers();
