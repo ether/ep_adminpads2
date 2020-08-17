@@ -1,82 +1,82 @@
 exports.documentReady = function(hooks, context, cb) {
-    if (context !== "admin/pads") {
+    if (context !== 'admin/pads') {
         return cb;
     }
 
     var socket,
         loc = document.location,
-        port = loc.port == "" ? (loc.protocol == "https:" ? 443 : 80) : loc.port,
-        url = loc.protocol + "//" + loc.hostname + ":" + port + "/",
-        pathComponents = location.pathname.split("/"),
+        port = loc.port == '' ? (loc.protocol == 'https:' ? 443 : 80) : loc.port,
+        url = loc.protocol + '//' + loc.hostname + ':' + port + '/',
+        pathComponents = location.pathname.split('/'),
         // Strip admin/plugins
-        baseURL = pathComponents.slice(0, pathComponents.length - 2).join("/") + "/",
-        resource = baseURL.substring(1) + "socket.io";
+        baseURL = pathComponents.slice(0, pathComponents.length - 2).join('/') + '/',
+        resource = baseURL.substring(1) + 'socket.io';
 
-    var room = url + "pluginfw/admin/pads";
+    var room = url + 'pluginfw/admin/pads';
 
     var changeTimer;
 
     //connect
-    socket = io.connect(room, {path: baseURL + "socket.io", resource: resource});
+    socket = io.connect(room, {path: baseURL + 'socket.io', resource: resource});
 
-    $(".search-results").data("query", {
-        pattern: "",
+    $('.search-results').data('query', {
+        pattern: '',
         offset: 0,
         limit: 12,
     });
 
     var doUpdate = false;
     var doAutoUpdate = function () {
-        return $("#results-autoupdate").prop("checked");
+        return $('#results-autoupdate').prop('checked');
     };
 
     var search = function () {
         clearTimeout(changeTimer);
-        socket.emit("search", $(".search-results").data("query"));
+        socket.emit('search', $('.search-results').data('query'));
     };
 
     var htmlEntities = function (padName) {
-        return $("<div/>").text(padName).html();
+        return $('<div/>').text(padName).html();
     };
 
     var submitSearch = function () {
-        var query = $(".search-results").data("query");
-        query.pattern = $("#search-query")[0].value;
+        var query = $('.search-results').data('query');
+        query.pattern = $('#search-query')[0].value;
         query.offset = 0;
         search();
     };
 
     var isInt = function (input) {
-        return typeof input === "number" && input % 1 === 0;
+        return typeof input === 'number' && input % 1 === 0;
     };
 
     var formatDate = function (longtime) {
-        var formattedDate = "";
+        var formattedDate = '';
         if (longtime != null && isInt(longtime)) {
             var date = new Date(longtime);
             var month = date.getMonth() + 1;
-            formattedDate = date.getFullYear() + "-" + fillZeros(month) + "-" + fillZeros(date.getDate()) + " " + fillZeros(date.getHours()) + ":" + fillZeros(date.getMinutes()) + ":" + fillZeros(date.getSeconds());
+            formattedDate = date.getFullYear() + '-' + fillZeros(month) + '-' + fillZeros(date.getDate()) + ' ' + fillZeros(date.getHours()) + ':' + fillZeros(date.getMinutes()) + ':' + fillZeros(date.getSeconds());
         }
         return formattedDate;
     };
 
     var fillZeros = function (fillForm) {
-        return isInt(fillForm) ? (fillForm < 10 ? "0" + fillForm : fillForm) : "";
+        return isInt(fillForm) ? (fillForm < 10 ? '0' + fillForm : fillForm) : '';
     };
 
     function updateHandlers() {
-        $("#progress.dialog .close").off("click").click(function () {
-            $("#progress.dialog").hide();
+        $('#progress.dialog .close').off('click').click(function () {
+            $('#progress.dialog').hide();
         });
 
-        $("#search-form").off("submit").on("submit", function (e) {
+        $('#search-form').off('submit').on('submit', function (e) {
             e.preventDefault();
             submitSearch();
         });
 
-        $("#do-search").off("click").click(submitSearch);
+        $('#do-search').off('click').click(submitSearch);
 
-        $("#search-query").off("change paste keyup").on("change paste keyup", function (e) {
+        $('#search-query').off('change paste keyup').on('change paste keyup', function (e) {
             clearTimeout(changeTimer);
             changeTimer = setTimeout(function () {
                 e.preventDefault();
@@ -84,26 +84,26 @@ exports.documentReady = function(hooks, context, cb) {
             }, 500);
         });
 
-        $(".do-delete").off("click").click(function (e) {
-            var row = $(e.target).closest("tr");
-            var padID = row.find(".padname").text();
-            if (confirm("Do you really want to delete the pad " + padID + "?")) {
+        $('.do-delete').off('click').click(function (e) {
+            var row = $(e.target).closest('tr');
+            var padID = row.find('.padname').text();
+            if (confirm('Do you really want to delete the pad ' + padID + '?')) {
                 doUpdate = true;
-                socket.emit("delete", padID);
+                socket.emit('delete', padID);
             }
         });
 
-        $(".do-prev-page").off("click").click(function (e) {
-            var query = $(".search-results").data("query");
+        $('.do-prev-page').off('click').click(function (e) {
+            var query = $('.search-results').data('query');
             query.offset -= query.limit;
             if (query.offset < 0) {
                 query.offset = 0;
             }
             search();
         });
-        $(".do-next-page").off("click").click(function (e) {
-            var query = $(".search-results").data("query");
-            var total = $(".search-results").data("total");
+        $('.do-next-page').off('click').click(function (e) {
+            var query = $('.search-results').data('query');
+            var total = $('.search-results').data('total');
             if (query.offset + query.limit < total) {
                 query.offset += query.limit;
             }
@@ -113,73 +113,73 @@ exports.documentReady = function(hooks, context, cb) {
 
     updateHandlers();
 
-    socket.on("progress", function (data) {
-        $("#progress .close").hide();
-        $("#progress").show();
+    socket.on('progress', function (data) {
+        $('#progress .close').hide();
+        $('#progress').show();
 
-        $("#progress").data("progress", data.progress);
+        $('#progress').data('progress', data.progress);
 
-        var message = "Unknown status";
+        var message = 'Unknown status';
         if (data.message) {
-            message = "<span class=\"status\">" + data.message.toString() + "</span>";
+            message = '<span class="status">' + data.message.toString() + '</span>';
         }
         if (data.error) {
-            message = "<span class=\"error\">" + data.error.toString() + "<span>";
+            message = '<span class="error">' + data.error.toString() + '<span>';
         }
-        $("#progress .message").html(message);
+        $('#progress .message').html(message);
 
         if (data.progress >= 1) {
             if (data.error) {
-                $("#progress").show();
+                $('#progress').show();
             } else {
                 if (doUpdate || doAutoUpdate()) {
                     doUpdate = false;
                     search();
                 }
-                $("#progress").hide();
+                $('#progress').hide();
             }
         }
     });
 
-    socket.on("search-result", function (data) {
-        var widget = $(".search-results")
+    socket.on('search-result', function (data) {
+        var widget = $('.search-results')
             , limit = data.query.offset + data.query.limit
         ;
         if (limit > data.total) {
             limit = data.total;
         }
 
-        widget.data("query", data.query);
-        widget.data("total", data.total);
+        widget.data('query', data.query);
+        widget.data('total', data.total);
 
-        widget.find(".offset").html(data.query.offset);
-        widget.find(".limit").html(limit);
-        widget.find(".total").html(data.total);
+        widget.find('.offset').html(data.query.offset);
+        widget.find('.limit').html(limit);
+        widget.find('.total').html(data.total);
 
-        widget.find(".results *").remove();
-        var resultList = widget.find(".results");
+        widget.find('.results *').remove();
+        var resultList = widget.find('.results');
 
         if (data.results.length > 0) {
             data.results.forEach(function (resultset) {
                 var padName = resultset.padName;
                 var lastEdited = resultset.lastEdited;
                 var userCount = resultset.userCount;
-                var row = widget.find(".template tr").clone();
-                row.find(".padname").html("<a href=\"../p/" + encodeURIComponent(padName) + "\">" + htmlEntities(padName) + "</a>"
+                var row = widget.find('.template tr').clone();
+                row.find('.padname').html('<a href="../p/' + encodeURIComponent(padName) + '">' + htmlEntities(padName) + '</a>'
             )
                 ;
-                row.find(".last-edited").html(formatDate(lastEdited));
-                row.find(".user-count").html(userCount);
+                row.find('.last-edited').html(formatDate(lastEdited));
+                row.find('.user-count').html(userCount);
                 resultList.append(row);
             });
         } else {
-            resultList.append("<tr><td colspan=\"4\" class=\"no - results\">No results</td></tr>");
+            resultList.append('<tr><td colspan="4" class="no - results">No results</td></tr>');
         }
 
         updateHandlers();
     });
 
-    socket.emit("load");
+    socket.emit('load');
     search();
     return cb;
 };
