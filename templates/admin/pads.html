@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Pad administration</title>
+    <title data-l10n-id="ep_adminpads2_title">Pad administration</title>
     <meta name="viewport" content="width=device-width">
     <link rel="stylesheet" href="../static/css/admin.css">
     <style type="text/css">
@@ -16,6 +16,9 @@
     <script src="../static/js/jquery.js"></script>
     <script src="../socket.io/socket.io.js"></script>
     <script type="text/javascript" src="../static/js/require-kernel.js"></script>
+    <link rel="localizations" type="application/l10n+json" href="../locales.json" />
+    <script src="../static/js/html10n.js"></script>
+    <script src="../static/js/l10n.js"></script>
 
     <!-- Include base packages manually (this help with debugging) -->
     <script type="text/javascript" src="../javascripts/lib/ep_etherpad-lite/static/js/ace2_common.js?callback=require.define"></script>
@@ -74,20 +77,20 @@
 
       <div class="innerwrapper">
         <div class="paged listing search-results">
-          <h2>Search for pads</h2>
+          <h2 data-l10n-id="ep_adminpads2_search-heading">Search for pads</h2>
           <form name="search-form" id="search-form">
-            <input type="text" name="search" placeholder="Search term" id="search-query">
-            <input type="button" value="Search" id="do-search">
+            <input type="text" name="search" placeholder="Search term" id="search-query" data-l10n-id="ep_adminpads2_search-box.placeholder">
+            <input type="button" value="Search" id="do-search" data-l10n-id="ep_adminpads2_search-button.value">
           </form>
-          <input type="checkbox" name="autoupdate" id="results-autoupdate" title="Enables or disables automatic updates for the current query.">
-          <label for="results-autoupdate">Auto-update on pad changes</label>
+          <input type="checkbox" name="autoupdate" id="results-autoupdate" title="Enables or disables automatic updates for the current query." data-l10n-id="ep_adminpads2_autoupdate.title">
+          <label for="results-autoupdate" data-l10n-id="ep_adminpads2_autoupdate-label">Auto-update on pad changes</label>
           <table>
             <thead>
               <tr>
-                <th>Padname</th>
-                <th>Last edited</th>
-                <th>Pad user count</th>
-                <th>Action</th>
+                <th data-l10n-id="ep_adminpads2_padname">Padname</th>
+                <th data-l10n-id="ep_adminpads2_last-edited">Last edited</th>
+                <th data-l10n-id="ep_adminpads2_pad-user-count">Pad user count</th>
+                <th data-l10n-id="ep_adminpads2_action">Action</th>
               </tr>
             </thead>
             <tbody class="template">
@@ -96,7 +99,7 @@
                 <td class="last-edited"></td>
                 <td class="user-count"></td>
                 <td class="actions">
-                  <input type="button" value="Delete" class="do-delete">
+                  <input type="button" value="Delete" class="do-delete" data-l10n-id="ep_adminpads2_delete.value">
                 </td>
               </tr>
             </tbody>
@@ -104,7 +107,7 @@
             </tbody>
           </table>
           <input type="button" value="&lt;&lt;" class="do-prev-page">
-          <span class="offset"></span>..<span class="limit"></span> of <span class="total"></span>
+          <span class="offset"></span>..<span class="limit"></span> <span data-l10n-id="ep_adminpads2_of">of</span> <span class="total"></span>
           <input type="button" value="&gt;&gt;" class="do-next-page">
         </div>
       </div>
