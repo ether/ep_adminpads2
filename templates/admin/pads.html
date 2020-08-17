@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
   <head>
     <title>Pad administration</title>
@@ -10,7 +11,7 @@
       .results .actions {}
       .results .no-results {font-style: italic;}
     </style>
-    
+
     <% e.begin_block("scripts"); %>
     <script src="../static/js/jquery.js"></script>
     <script src="../socket.io/socket.io.js"></script>
@@ -29,9 +30,9 @@
         // Strip 'p' and the padname from the pathname and set as baseURL
         let baseURL = pathComponents.slice(0, pathComponents.length - 2).join('/') + '/';
 
-        require.setRootURI(baseURL + "javascripts/src");
-        require.setLibraryURI(baseURL + "javascripts/lib");
-        require.setGlobalKeyPath("require");
+        require.setRootURI(baseURL + 'javascripts/src');
+        require.setLibraryURI(baseURL + 'javascripts/lib');
+        require.setGlobalKeyPath('require');
 
         $ = jQuery = require('ep_etherpad-lite/static/js/rjquery').jQuery; // Expose jQuery #HACK
 
@@ -53,61 +54,61 @@
   </head>
   <body>
     <div id="wrapper">
-
       <% if (errors.length) { %>
-        <div class="errors">
-          <% errors.forEach(function (item) { %>
-            <div class="error"><%= item.toString() %></div>
-          <% }) %>
-        </div>
+      <div class="errors">
+        <% errors.forEach(function (item) { %>
+        <div class="error"><%= item.toString() %></div>
+        <% }) %>
+      </div>
       <% } %>
 
       <div class="menu">
         <h1><a href="../../">Etherpad</a></h1>
-        <ul> 
+        <ul>
           <% e.begin_block("adminMenu"); %>
-          <li><a href="plugins">Plugin manager</a> </li>
-          <li><a href="settings">Settings</a> </li>
-          <li><a href="plugins/info">Troubleshooting information</a> </li>
+          <li><a href="plugins">Plugin manager</a></li>
+          <li><a href="settings">Settings</a></li>
+          <li><a href="plugins/info">Troubleshooting information</a></li>
           <% e.end_block(); %>
         </ul>
       </div>
 
       <div class="innerwrapper">
         <div class="paged listing search-results">
-        <h2>Search for pads</h2>
-        <form name="search-form" id="search-form">
-          <input type="text" name="search" placeholder="Search term" id="search-query">
-          <input type="button" value="Search" id="do-search">
-        </form>
-        <input type="checkbox" name="autoupdate" id="results-autoupdate" title="Enables or disables automatic updates for the current query."><label for="autoupdate">Auto-update on pad changes</label>
-        <table>
-          <thead>
-            <tr>
-              <th>Padname</th>
-              <th>Last edited</th>
-              <th>Pad user count</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody class="template">
-            <tr>
-              <td class="padname"></td>
-              <td class="last-edited"></td>
-              <td class="user-count"></td>
-              <td class="actions">
-                <input type="button" value="Delete" class="do-delete">
-             </td>
-            </tr>
-          </tbody>
-          <tbody class="results">
-          </tbody>
-        </table>
-        <input type="button" value="&lt;&lt;" class="do-prev-page">
-        <span class="offset"></span>..<span class="limit"></span> of <span class="total"></span>.
-        <input type="button" value="&gt;&gt;" class="do-next-page">
+          <h2>Search for pads</h2>
+          <form name="search-form" id="search-form">
+            <input type="text" name="search" placeholder="Search term" id="search-query">
+            <input type="button" value="Search" id="do-search">
+          </form>
+          <input type="checkbox" name="autoupdate" id="results-autoupdate" title="Enables or disables automatic updates for the current query.">
+          <label for="results-autoupdate">Auto-update on pad changes</label>
+          <table>
+            <thead>
+              <tr>
+                <th>Padname</th>
+                <th>Last edited</th>
+                <th>Pad user count</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody class="template">
+              <tr>
+                <td class="padname"></td>
+                <td class="last-edited"></td>
+                <td class="user-count"></td>
+                <td class="actions">
+                  <input type="button" value="Delete" class="do-delete">
+                </td>
+              </tr>
+            </tbody>
+            <tbody class="results">
+            </tbody>
+          </table>
+          <input type="button" value="&lt;&lt;" class="do-prev-page">
+          <span class="offset"></span>..<span class="limit"></span> of <span class="total"></span>
+          <input type="button" value="&gt;&gt;" class="do-next-page">
+        </div>
       </div>
     </div>
   </body>
-  
 </html>
