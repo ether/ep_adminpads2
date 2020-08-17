@@ -130,7 +130,7 @@ exports.updatePads = async function (hook_name, args) {
 };
 
 exports.eejsBlock_adminMenu = async function (hook_name, args) {
-    let hasAdminUrlPrefix = args.content.indexOf('<a href="admin"') !== -1,
+    let hasAdminUrlPrefix = args.content.indexOf('<a href="admin/') !== -1,
         hasOneDirDown = args.content.indexOf('<a href="../') !== -1,
         hasTwoDirDown = args.content.indexOf('<a href="../../') !== -1,
         urlPrefix = hasAdminUrlPrefix ? 'admin/' : hasTwoDirDown ? '../../' : hasOneDirDown ? '../' : '';
