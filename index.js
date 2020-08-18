@@ -136,6 +136,6 @@ exports.eejsBlock_adminMenu = function (hook_name, args, cb) {
         hasOneDirDown = args.content.indexOf('<a href="../') !== -1,
         hasTwoDirDown = args.content.indexOf('<a href="../../') !== -1,
         urlPrefix = hasAdminUrlPrefix ? 'admin/' : hasTwoDirDown ? '../../' : hasOneDirDown ? '../' : '';
-    args.content = args.content + '<li><a href="' + urlPrefix + 'pads">Manage pads</a></li>';
+    args.content = args.content + '<li><a href="' + urlPrefix + 'pads" data-l10n-id="ep_adminpads2_manage-pads">Manage pads</a></li>';
     return cb();
 };
