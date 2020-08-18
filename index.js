@@ -89,13 +89,14 @@ let pads = {
     },
 };
 
-exports.registerRoute = async function (hook_name, args) {
+exports.registerRoute = function (hook_name, args, cb) {
     args.app.get('/admin/pads', function (req, res) {
         let render_args = {
             errors: [],
         };
         res.send(eejs.require('ep_adminpads2/templates/admin/pads.html', render_args));
     });
+    return cb();
 };
 
 let io = null;
@@ -125,14 +126,16 @@ exports.socketio = function (hook_name, args) {
     });
 };
 
-exports.updatePads = async function (hook_name, args) {
+exports.updatePads = function (hook_name, args, cb) {
     io.emit('progress', {progress: 1});
+    return cb();
 };
 
-exports.eejsBlock_adminMenu = async function (hook_name, args) {
+exports.eejsBlock_adminMenu = function (hook_name, args, cb) {
     let hasAdminUrlPrefix = args.content.indexOf('<a href="admin/') !== -1,
         hasOneDirDown = args.content.indexOf('<a href="../') !== -1,
         hasTwoDirDown = args.content.indexOf('<a href="../../') !== -1,
         urlPrefix = hasAdminUrlPrefix ? 'admin/' : hasTwoDirDown ? '../../' : hasOneDirDown ? '../' : '';
-    args.content = args.content + '<li><a href="' + urlPrefix + 'pads">Manage pads</a></li>';
+    args.content = args.content + '<li><a href="' + urlPrefix + 'pads" data-l10n-id="ep_adminpads2_manage-pads">Manage pads</a></li>';
+    return cb();
 };
