@@ -3,9 +3,6 @@ const padManager = require('ep_etherpad-lite/node/db/PadManager');
 const api = require('ep_etherpad-lite/node/db/API');
 const queryLimit = 12;
 
-RegExp.quote = function (x) {
-  return x.toString().replace(/[-\\^$*+?.()|[\]{}]/g, '\\$&');
-};
 const isNumeric = function (arg) {
   return typeof arg == 'number' || (typeof arg == 'string' && parseInt(arg));
 };
@@ -22,7 +19,7 @@ const search = async (query) => {
   let result = padIDs;
   if (query.pattern != null && query.pattern !== '') {
     let pattern = '*' + query.pattern + '*';
-    pattern = RegExp.quote(pattern);
+    pattern = regExpQuote(pattern);
     pattern = pattern.replace(/(\\\*)+/g, '.*');
     pattern = '^' + pattern + '$';
     const regex = new RegExp(pattern, 'i');
@@ -111,3 +108,5 @@ exports.eejsBlock_adminMenu = function (hook_name, args, cb) {
   args.content = args.content + '<li><a href="' + urlPrefix + 'pads" data-l10n-id="ep_adminpads2_manage-pads">Manage pads</a></li>';
   return cb();
 };
+
+const regExpQuote = (x) => x.toString().replace(/[-\\^$*+?.()|[\]{}]/g, '\\$&');
