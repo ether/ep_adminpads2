@@ -3,14 +3,14 @@
         {
             "name": "ep_adminpads2",
             "hooks": {
-                "expressCreateServer" : "ep_adminpads2/index:registerRoute",
-                "socketio" : "ep_adminpads2/index:socketio",
-                "padRemove" : "ep_adminpads2/index:updatePads",
-                "padCreate" : "ep_adminpads2/index:updatePads",
-                "eejsBlock_adminMenu" : "ep_adminpads2/index:eejsBlock_adminMenu"
+                "expressCreateServer": "ep_adminpads2:registerRoute",
+                "socketio": "ep_adminpads2",
+                "padRemove": "ep_adminpads2:updatePads",
+                "padCreate": "ep_adminpads2:updatePads",
+                "eejsBlock_adminMenu": "ep_adminpads2"
             },
-            "client_hooks" : {
-                "documentReady" : "ep_adminpads2/static/js/admin/pads:documentReady"
+            "client_hooks": {
+                "documentReady": "ep_adminpads2/static/js/admin/pads"
             }
         }
     ]
