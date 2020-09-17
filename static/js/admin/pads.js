@@ -119,17 +119,18 @@ exports.documentReady = async (hookName, context) => {
 
     $('#progress').data('progress', data.progress);
 
-    var message = _('ep_adminpads2_unknown-status') || 'Unknown status';
-    if (data.message) {
-      message = '<span class="status">' + data.message.toString() + '</span>';
+    const message = $('<span>');
+    if (data.isError) {
+      message.addClass('error');
+      message.text(_(data.messageId) || _('ep_adminpads2_unknown-error') || 'Unknown error');
+    } else {
+      message.addClass('status');
+      message.text(_(data.messageId) || _('ep_adminpads2_unknown-status') || 'Unknown status');
     }
-    if (data.error) {
-      message = '<span class="error">' + data.error.toString() + '<span>';
-    }
-    $('#progress .message').html(message);
+    $('#progress .message').empty().append(message);
 
     if (data.progress >= 1) {
-      if (data.error) {
+      if (data.isError) {
         $('#progress').show();
       } else {
         if (doUpdate || doAutoUpdate()) {
