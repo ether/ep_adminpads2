@@ -3,7 +3,7 @@
         {
             "name": "ep_adminpads2",
             "hooks": {
-                "expressCreateServer": "ep_adminpads2:registerRoute",
+                "expressCreateServer": "ep_adminpads2",
                 "socketio": "ep_adminpads2",
                 "padRemove": "ep_adminpads2:updatePads",
                 "padCreate": "ep_adminpads2:updatePads",

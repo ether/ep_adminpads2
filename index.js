@@ -89,7 +89,7 @@ let pads = {
     },
 };
 
-exports.registerRoute = function (hook_name, args, cb) {
+exports.expressCreateServer = function (hook_name, args, cb) {
     args.app.get('/admin/pads', function (req, res) {
         let render_args = {
             errors: [],
