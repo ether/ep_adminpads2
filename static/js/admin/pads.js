@@ -1,6 +1,6 @@
-exports.documentReady = function(hooks, context, cb) {
+exports.documentReady = async (hookName, context) => {
   if (context !== 'admin/pads') {
-    return cb;
+    return;
   }
 
   var socket,
@@ -184,5 +184,5 @@ exports.documentReady = function(hooks, context, cb) {
 
   socket.emit('load');
   search();
-  return cb;
+  return;
 };
