@@ -19,7 +19,7 @@ exports.documentReady = async (hookName, context) => {
   //connect
   socket = io.connect(room, {path: baseURL + 'socket.io', resource: resource});
 
-  $('.search-results').data('query', {
+  $('#search-results').data('query', {
     pattern: '',
     offset: 0,
     limit: 12,
@@ -32,7 +32,7 @@ exports.documentReady = async (hookName, context) => {
 
   var search = function () {
     clearTimeout(changeTimer);
-    socket.emit('search', $('.search-results').data('query'));
+    socket.emit('search', $('#search-results').data('query'));
   };
 
   var htmlEntities = function (padName) {
@@ -40,7 +40,7 @@ exports.documentReady = async (hookName, context) => {
   };
 
   var submitSearch = function () {
-    var query = $('.search-results').data('query');
+    var query = $('#search-results').data('query');
     query.pattern = $('#search-query')[0].value;
     query.offset = 0;
     search();
@@ -93,17 +93,17 @@ exports.documentReady = async (hookName, context) => {
       }
     });
 
-    $('.do-prev-page').off('click').click(function (e) {
-      var query = $('.search-results').data('query');
+    $('#do-prev-page').off('click').click(function (e) {
+      var query = $('#search-results').data('query');
       query.offset -= query.limit;
       if (query.offset < 0) {
         query.offset = 0;
       }
       search();
     });
-    $('.do-next-page').off('click').click(function (e) {
-      var query = $('.search-results').data('query');
-      var total = $('.search-results').data('total');
+    $('#do-next-page').off('click').click(function (e) {
+      var query = $('#search-results').data('query');
+      var total = $('#search-results').data('total');
       if (query.offset + query.limit < total) {
         query.offset += query.limit;
       }
@@ -143,7 +143,7 @@ exports.documentReady = async (hookName, context) => {
   });
 
   socket.on('search-result', function (data) {
-    var widget = $('.search-results'),
+    var widget = $('#search-results'),
         limit = data.query.offset + data.query.limit;
     if (limit > data.total) {
       limit = data.total;
@@ -156,15 +156,15 @@ exports.documentReady = async (hookName, context) => {
     widget.find('.limit').html(limit);
     widget.find('.total').html(data.total);
 
-    widget.find('.results *').remove();
-    var resultList = widget.find('.results');
+    widget.find('#results *').remove();
+    var resultList = widget.find('#results');
 
     if (data.results.length > 0) {
       data.results.forEach(function (resultset) {
         var padName = resultset.padName;
         var lastEdited = resultset.lastEdited;
         var userCount = resultset.userCount;
-        var row = widget.find('.template tr').clone();
+        var row = widget.find('#template tr').clone();
         row.find('.padname').html('<a href="../p/' + encodeURIComponent(padName) + '">' + htmlEntities(padName) + '</a>');
         row.find('.last-edited').html(formatDate(lastEdited));
         row.find('.user-count').html(userCount);
