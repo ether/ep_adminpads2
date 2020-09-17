@@ -5,8 +5,8 @@
       "hooks": {
         "expressCreateServer": "ep_adminpads2",
         "socketio": "ep_adminpads2",
-        "padRemove": "ep_adminpads2:updatePads",
-        "padCreate": "ep_adminpads2:updatePads",
+        "padRemove": "ep_adminpads2",
+        "padCreate": "ep_adminpads2",
         "eejsBlock_adminMenu": "ep_adminpads2"
       },
       "client_hooks": {

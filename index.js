@@ -126,10 +126,13 @@ exports.socketio = function (hook_name, args) {
   });
 };
 
-exports.updatePads = function (hook_name, args, cb) {
+const updatePads = (hookName, args, cb) => {
   io.emit('progress', {progress: 1});
   return cb();
 };
+
+exports.padRemove = updatePads;
+exports.padCreate = updatePads;
 
 exports.eejsBlock_adminMenu = function (hook_name, args, cb) {
   let hasAdminUrlPrefix = args.content.indexOf('<a href="admin/') !== -1,
