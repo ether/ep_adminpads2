@@ -10,83 +10,52 @@ const isNumeric = function (arg) {
   return typeof arg == 'number' || (typeof arg == 'string' && parseInt(arg));
 };
 
-let pads = {
-  pads: [],
-  search: async function (query) {
-    let the_pads = await padManager.listAllPads();
-    return await pads._do_search(the_pads.padIDs, query);
-  },
-  _do_search: async function (pads, query) {
-    let data = {
-      progress: 1,
-      message: 'Search done.',
-      query: query,
-      total: pads.length,
-    },
-        maxResult = 0,
-        result = [];
-    if (query['pattern'] != null && query['pattern'] !== '') {
-      let pattern = '*' + query.pattern + '*';
-      pattern = RegExp.quote(pattern);
-      pattern = pattern.replace(/(\\\*)+/g, '.*');
-      pattern = '^' + pattern + '$';
-      let regex = new RegExp(pattern, 'i');
-      pads.forEach(function (padID) {
-        if (regex.test(padID)) {
-          result.push(padID);
-        }
-      });
-    } else {
-      result = pads;
-    }
+const search = async (query) => {
+  const {padIDs} = await padManager.listAllPads();
+  const data = {
+    progress: 1,
+    message: 'Search done.',
+    query: query,
+    total: padIDs.length,
+  };
+  let maxResult = 0;
+  let result = padIDs;
+  if (query.pattern != null && query.pattern !== '') {
+    let pattern = '*' + query.pattern + '*';
+    pattern = RegExp.quote(pattern);
+    pattern = pattern.replace(/(\\\*)+/g, '.*');
+    pattern = '^' + pattern + '$';
+    const regex = new RegExp(pattern, 'i');
+    result = result.filter(regex.test.bind(regex));
+  }
 
-    data.total = result.length;
+  data.total = result.length;
 
-    maxResult = result.length - 1;
-    if (maxResult < 0) {
-      maxResult = 0;
-    }
+  maxResult = result.length - 1;
+  if (maxResult < 0) {
+    maxResult = 0;
+  }
 
-    if (!isNumeric(query.offset) || query.offset < 0) {
-      query.offset = 0;
-    } else if (query.offset > maxResult) {
-      query.offset = maxResult;
-    }
+  if (!isNumeric(query.offset) || query.offset < 0) {
+    query.offset = 0;
+  } else if (query.offset > maxResult) {
+    query.offset = maxResult;
+  }
 
-    if (!isNumeric(query.limit) || query.limit < 0) {
-      query.limit = queryLimit;
-    }
+  if (!isNumeric(query.limit) || query.limit < 0) {
+    query.limit = queryLimit;
+  }
 
-    let rs = result.slice(query.offset, query.offset + query.limit);
+  let rs = result.slice(query.offset, query.offset + query.limit);
 
-    pads.pads = rs;
-
-    let entrySet;
-    data.results = [];
-
-    rs.forEach(function (value) {
-      entrySet = {padName: value, lastEdited: '', userCount: 0};
-      data.results.push(entrySet);
-    });
-
-    let getEdited = [];
-    if (data.results.length > 0) {
-      data.results.forEach(function (value) {
-        getEdited.push(
-          api.getLastEdited(value.padName)
-              .then((resultObject) => {
-                value.lastEdited = resultObject.lastEdited;
-                resultObject = api.padUsersCount(value.padName);
-                value.userCount = resultObject.padUsersCount;
-              }));
-      });
-    } else {
-      data.message = 'No results';
-    }
-
-    await Promise.all(getEdited);
-    return data;
-  },
+  data.results = rs.map((padName) => ({padName, lastEdited: '', userCount: 0}));
+  if (!data.results.length) data.message = 'No results';
+  await Promise.all(data.results.map(async (entry) => {
+    const pad = await padManager.getPad(entry.padName);
+    entry.userCount = api.padUsersCount(entry.padName).padUsersCount;
+    entry.lastEdited = await pad.getLastEdit();
+  }));
+  return data;
 };
 
 exports.expressCreateServer = function (hook_name, args, cb) {
@@ -105,12 +74,12 @@ exports.socketio = function (hook_name, args) {
   io = args.io.of('/pluginfw/admin/pads');
   io.on('connection', function (socket) {
     socket.on('load', async function (query) {
-      let result = await pads.search({pattern: '', offset: 0, limit: queryLimit});
+      let result = await search({pattern: '', offset: 0, limit: queryLimit});
       socket.emit('search-result', result);
     });
 
     socket.on('search', async function (query) {
-      let result = await pads.search(query);
+      let result = await search(query);
       socket.emit('search-result', result);
     });
 
