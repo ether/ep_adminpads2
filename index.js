@@ -4,9 +4,7 @@ const padManager = require('ep_etherpad-lite/node/db/PadManager');
 const api = require('ep_etherpad-lite/node/db/API');
 const queryLimit = 12;
 
-const isNumeric = function (arg) {
-  return typeof arg == 'number' || (typeof arg == 'string' && parseInt(arg));
-};
+const isNumeric = (arg) => typeof arg == 'number' || (typeof arg == 'string' && parseInt(arg));
 
 const search = async (query) => {
   const {padIDs} = await padManager.listAllPads();
@@ -56,8 +54,8 @@ const search = async (query) => {
   return data;
 };
 
-exports.expressCreateServer = function (hook_name, args, cb) {
-  args.app.get('/admin/pads', function (req, res) {
+exports.expressCreateServer = (hook_name, args, cb) => {
+  args.app.get('/admin/pads', (req, res) => {
     let render_args = {
       errors: [],
     };
@@ -68,20 +66,20 @@ exports.expressCreateServer = function (hook_name, args, cb) {
 
 let io = null;
 
-exports.socketio = function (hook_name, args) {
+exports.socketio = (hook_name, args) => {
   io = args.io.of('/pluginfw/admin/pads');
-  io.on('connection', function (socket) {
-    socket.on('load', async function (query) {
+  io.on('connection', (socket) => {
+    socket.on('load', async (query) => {
       let result = await search({pattern: '', offset: 0, limit: queryLimit});
       socket.emit('search-result', result);
     });
 
-    socket.on('search', async function (query) {
+    socket.on('search', async (query) => {
       let result = await search(query);
       socket.emit('search-result', result);
     });
 
-    socket.on('delete', async function (padId) {
+    socket.on('delete', async (padId) => {
       let padExists = await padManager.doesPadExists(padId);
       if (padExists) {
         //pad exists, remove

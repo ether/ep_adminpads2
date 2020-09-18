@@ -26,31 +26,25 @@ exports.documentReady = async (hookName, context) => {
   });
 
   var doUpdate = false;
-  var doAutoUpdate = function () {
-    return $('#results-autoupdate').prop('checked');
-  };
+  var doAutoUpdate = () => $('#results-autoupdate').prop('checked');
 
-  var search = function () {
+  var search = () => {
     clearTimeout(changeTimer);
     socket.emit('search', $('#search-results').data('query'));
   };
 
-  var htmlEntities = function (padName) {
-    return $('<div/>').text(padName).html();
-  };
+  var htmlEntities = (padName) => $('<div/>').text(padName).html();
 
-  var submitSearch = function () {
+  var submitSearch = () => {
     var query = $('#search-results').data('query');
     query.pattern = $('#search-query')[0].value;
     query.offset = 0;
     search();
   };
 
-  var isInt = function (input) {
-    return typeof input === 'number' && input % 1 === 0;
-  };
+  var isInt = (input) => typeof input === 'number' && input % 1 === 0;
 
-  var formatDate = function (longtime) {
+  var formatDate = (longtime) => {
     var formattedDate = '';
     if (longtime != null && isInt(longtime)) {
       var date = new Date(longtime);
@@ -60,31 +54,27 @@ exports.documentReady = async (hookName, context) => {
     return formattedDate;
   };
 
-  var fillZeros = function (fillForm) {
-    return isInt(fillForm) ? (fillForm < 10 ? '0' + fillForm : fillForm) : '';
-  };
+  var fillZeros = (x) => isInt(x) ? (x < 10 ? '0' + x : x) : '';
 
-  function updateHandlers() {
-    $('#progress.dialog .close').off('click').click(function () {
-      $('#progress.dialog').hide();
-    });
+  const updateHandlers = () => {
+    $('#progress.dialog .close').off('click').click(() => $('#progress.dialog').hide());
 
-    $('#search-form').off('submit').on('submit', function (e) {
+    $('#search-form').off('submit').on('submit', (e) => {
       e.preventDefault();
       submitSearch();
     });
 
     $('#do-search').off('click').click(submitSearch);
 
-    $('#search-query').off('change paste keyup').on('change paste keyup', function (e) {
+    $('#search-query').off('change paste keyup').on('change paste keyup', (e) => {
       clearTimeout(changeTimer);
-      changeTimer = setTimeout(function () {
+      changeTimer = setTimeout(() => {
         e.preventDefault();
         submitSearch();
       }, 500);
     });
 
-    $('.do-delete').off('click').click(function (e) {
+    $('.do-delete').off('click').click((e) => {
       var row = $(e.target).closest('tr');
       var padID = row.find('.padname').text();
       if (confirm(_('ep_adminpads2_confirm', {padID: padID}) || `Do you really want to delete the pad ${padID}?`)) {
@@ -93,7 +83,7 @@ exports.documentReady = async (hookName, context) => {
       }
     });
 
-    $('#do-prev-page').off('click').click(function (e) {
+    $('#do-prev-page').off('click').click((e) => {
       var query = $('#search-results').data('query');
       query.offset -= query.limit;
       if (query.offset < 0) {
@@ -101,7 +91,7 @@ exports.documentReady = async (hookName, context) => {
       }
       search();
     });
-    $('#do-next-page').off('click').click(function (e) {
+    $('#do-next-page').off('click').click((e) => {
       var query = $('#search-results').data('query');
       var total = $('#search-results').data('total');
       if (query.offset + query.limit < total) {
@@ -113,7 +103,7 @@ exports.documentReady = async (hookName, context) => {
 
   updateHandlers();
 
-  socket.on('progress', function (data) {
+  socket.on('progress', (data) => {
     $('#progress .close').hide();
     $('#progress').show();
 
@@ -142,7 +132,7 @@ exports.documentReady = async (hookName, context) => {
     }
   });
 
-  socket.on('search-result', function (data) {
+  socket.on('search-result', (data) => {
     var widget = $('#search-results'),
         limit = data.query.offset + data.query.limit;
     if (limit > data.total) {
@@ -160,7 +150,7 @@ exports.documentReady = async (hookName, context) => {
     var resultList = widget.find('#results');
 
     if (data.results.length > 0) {
-      data.results.forEach(function (resultset) {
+      data.results.forEach((resultset) => {
         var padName = resultset.padName;
         var lastEdited = resultset.lastEdited;
         var userCount = resultset.userCount;
