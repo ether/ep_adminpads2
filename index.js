@@ -1,14 +1,10 @@
+const $ = require('cheerio');
 const eejs = require('ep_etherpad-lite/node/eejs');
 const padManager = require('ep_etherpad-lite/node/db/PadManager');
 const api = require('ep_etherpad-lite/node/db/API');
 const queryLimit = 12;
 
-RegExp.quote = function (x) {
-  return x.toString().replace(/[-\\^$*+?.()|[\]{}]/g, '\\$&');
-};
-const isNumeric = function (arg) {
-  return typeof arg == 'number' || (typeof arg == 'string' && parseInt(arg));
-};
+const isNumeric = (arg) => typeof arg == 'number' || (typeof arg == 'string' && parseInt(arg));
 
 const search = async (query) => {
   const {padIDs} = await padManager.listAllPads();
@@ -22,7 +18,7 @@ const search = async (query) => {
   let result = padIDs;
   if (query.pattern != null && query.pattern !== '') {
     let pattern = '*' + query.pattern + '*';
-    pattern = RegExp.quote(pattern);
+    pattern = regExpQuote(pattern);
     pattern = pattern.replace(/(\\\*)+/g, '.*');
     pattern = '^' + pattern + '$';
     const regex = new RegExp(pattern, 'i');
@@ -58,8 +54,8 @@ const search = async (query) => {
   return data;
 };
 
-exports.expressCreateServer = function (hook_name, args, cb) {
-  args.app.get('/admin/pads', function (req, res) {
+exports.expressCreateServer = (hook_name, args, cb) => {
+  args.app.get('/admin/pads', (req, res) => {
     let render_args = {
       errors: [],
     };
@@ -70,20 +66,20 @@ exports.expressCreateServer = function (hook_name, args, cb) {
 
 let io = null;
 
-exports.socketio = function (hook_name, args) {
+exports.socketio = (hook_name, args) => {
   io = args.io.of('/pluginfw/admin/pads');
-  io.on('connection', function (socket) {
-    socket.on('load', async function (query) {
+  io.on('connection', (socket) => {
+    socket.on('load', async (query) => {
       let result = await search({pattern: '', offset: 0, limit: queryLimit});
       socket.emit('search-result', result);
     });
 
-    socket.on('search', async function (query) {
+    socket.on('search', async (query) => {
       let result = await search(query);
       socket.emit('search-result', result);
     });
 
-    socket.on('delete', async function (padId) {
+    socket.on('delete', async (padId) => {
       let padExists = await padManager.doesPadExists(padId);
       if (padExists) {
         //pad exists, remove
@@ -103,11 +99,17 @@ const updatePads = (hookName, args, cb) => {
 exports.padRemove = updatePads;
 exports.padCreate = updatePads;
 
-exports.eejsBlock_adminMenu = function (hook_name, args, cb) {
-  let hasAdminUrlPrefix = args.content.indexOf('<a href="admin/') !== -1,
-      hasOneDirDown = args.content.indexOf('<a href="../') !== -1,
-      hasTwoDirDown = args.content.indexOf('<a href="../../') !== -1,
-      urlPrefix = hasAdminUrlPrefix ? 'admin/' : hasTwoDirDown ? '../../' : hasOneDirDown ? '../' : '';
-  args.content = args.content + '<li><a href="' + urlPrefix + 'pads" data-l10n-id="ep_adminpads2_manage-pads">Manage pads</a></li>';
+exports.eejsBlock_adminMenu = (hookName, context, cb) => {
+  const ul = $('<ul>').html(context.content);
+  const pfx = ul.find('li a').attr('href').match(/^((?:\.\.\/)*)/)[1];
+  ul.append(
+      $('<li>').append(
+          $('<a>')
+              .attr('href', `${pfx}pads`)
+              .attr('data-l10n-id', 'ep_adminpads2_manage-pads')
+              .text('Manage pads')));
+  context.content = ul.html();
   return cb();
 };
+
+const regExpQuote = (x) => x.toString().replace(/[-\\^$*+?.()|[\]{}]/g, '\\$&');

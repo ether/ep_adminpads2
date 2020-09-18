@@ -11,5 +11,8 @@
     "url": "https://github.com/rhansen/ep_adminpads2.git"
   },
   "main": "index.js",
+  "dependencies": {
+    "cheerio": "^0.22.0"
+  },
   "license": "MIT"
 }
