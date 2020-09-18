@@ -14,6 +14,8 @@
 
   "ep_adminpads2_confirm": "Biztosan törölni szeretné a(z) {{padID}} jegyzetfüzetet?",
   "ep_adminpads2_unknown-status": "Ismeretlen állapot",
+  "ep_adminpads2_unknown-error": "Ismeretlen hiba",
+  "ep_adminpads2_search-done": "Keresés befejezve",
   "ep_adminpads2_no-results": "Nincs találat",
 
   "ep_adminpads2_manage-pads": "Jegyzetfüzetek kezelése"
