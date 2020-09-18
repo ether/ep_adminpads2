@@ -1,3 +1,4 @@
+const $ = require('cheerio');
 const eejs = require('ep_etherpad-lite/node/eejs');
 const padManager = require('ep_etherpad-lite/node/db/PadManager');
 const api = require('ep_etherpad-lite/node/db/API');
@@ -100,12 +101,16 @@ const updatePads = (hookName, args, cb) => {
 exports.padRemove = updatePads;
 exports.padCreate = updatePads;
 
-exports.eejsBlock_adminMenu = function (hook_name, args, cb) {
-  let hasAdminUrlPrefix = args.content.indexOf('<a href="admin/') !== -1,
-      hasOneDirDown = args.content.indexOf('<a href="../') !== -1,
-      hasTwoDirDown = args.content.indexOf('<a href="../../') !== -1,
-      urlPrefix = hasAdminUrlPrefix ? 'admin/' : hasTwoDirDown ? '../../' : hasOneDirDown ? '../' : '';
-  args.content = args.content + '<li><a href="' + urlPrefix + 'pads" data-l10n-id="ep_adminpads2_manage-pads">Manage pads</a></li>';
+exports.eejsBlock_adminMenu = (hookName, context, cb) => {
+  const ul = $('<ul>').html(context.content);
+  const pfx = ul.find('li a').attr('href').match(/^((?:\.\.\/)*)/)[1];
+  ul.append(
+      $('<li>').append(
+          $('<a>')
+              .attr('href', `${pfx}pads`)
+              .attr('data-l10n-id', 'ep_adminpads2_manage-pads')
+              .text('Manage pads')));
+  context.content = ul.html();
   return cb();
 };
 
