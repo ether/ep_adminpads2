@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width">
     <link rel="stylesheet" href="../static/css/admin.css">
     <style type="text/css">
-      #results .padname {}
-      #results .last-edited {text-align: right;}
-      #results .user-count {text-align: right;}
-      #results .actions {}
-      #results .no-results {font-style: italic;}
+      #results-table .padname {text-align: left;}
+      #results-table .last-edited {text-align: center; width: 1%; white-space: nowrap;}
+      #results-table .user-count {text-align: right; width: 1%; white-space: nowrap;}
+      #results-table .actions {text-align: center; width: 1%; white-space: nowrap;}
+      #results-table .no-results {font-style: italic;}
     </style>
 
     <% e.begin_block("scripts"); %>
@@ -84,13 +84,13 @@
           </form>
           <input type="checkbox" name="autoupdate" id="results-autoupdate" title="Enables or disables automatic updates for the current query." data-l10n-id="ep_adminpads2_autoupdate.title">
           <label for="results-autoupdate" data-l10n-id="ep_adminpads2_autoupdate-label">Auto-update on pad changes</label>
-          <table>
+          <table id="results-table">
             <thead>
               <tr>
-                <th data-l10n-id="ep_adminpads2_padname">Padname</th>
-                <th data-l10n-id="ep_adminpads2_last-edited">Last edited</th>
-                <th data-l10n-id="ep_adminpads2_pad-user-count">Pad user count</th>
-                <th data-l10n-id="ep_adminpads2_action">Action</th>
+                <th class="padname" data-l10n-id="ep_adminpads2_padname">Padname</th>
+                <th class="last-edited" data-l10n-id="ep_adminpads2_last-edited">Last edited</th>
+                <th class="user-count" data-l10n-id="ep_adminpads2_pad-user-count">Pad user count</th>
+                <th class="actions" data-l10n-id="ep_adminpads2_action">Action</th>
               </tr>
             </thead>
             <tbody class="template">
