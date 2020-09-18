@@ -3,20 +3,15 @@ exports.documentReady = async (hookName, context) => {
     return;
   }
 
-  let socket;
-  const loc = document.location;
-  const port = loc.port == '' ? (loc.protocol == 'https:' ? 443 : 80) : loc.port;
-  const url = loc.protocol + '//' + loc.hostname + ':' + port + '/';
-  const pathComponents = location.pathname.split('/');
-  const baseURL = pathComponents.slice(0, pathComponents.length - 2).join('/') + '/';
-  const resource = baseURL.substring(1) + 'socket.io';
+  const basePath = location.pathname.split('/').slice(0, -2).join('/'); // Strip /admin/plugins.
+  const socketioPath = `${basePath}/socket.io`;
+  // Note: The socket.io URL should not contain ${basePath} because the path part of this URL is
+  // used as the socket.io namespace.
+  const socketioUrl = `${location.protocol}//${location.host}/pluginfw/admin/pads`;
 
-  const room = url + 'pluginfw/admin/pads';
+  const socket = io.connect(socketioUrl, {path: socketioPath});
 
   let changeTimer;
-
-  //connect
-  socket = io.connect(room, {path: baseURL + 'socket.io', resource: resource});
 
   $('#search-results').data('query', {
     pattern: '',
