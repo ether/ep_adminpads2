@@ -27,8 +27,6 @@ exports.documentReady = async (hookName, context) => {
     socket.emit('search', $('#search-results').data('query'));
   };
 
-  const htmlEntities = (padName) => $('<div/>').text(padName).html();
-
   const submitSearch = () => {
     const query = $('#search-results').data('query');
     query.pattern = $('#search-query')[0].value;
@@ -145,13 +143,12 @@ exports.documentReady = async (hookName, context) => {
 
     if (data.results.length > 0) {
       data.results.forEach((resultset) => {
-        const padName = resultset.padName;
-        const lastEdited = resultset.lastEdited;
-        const userCount = resultset.userCount;
-        const row = widget.find('#template tr').clone();
-        row.find('.padname').html('<a href="../p/' + encodeURIComponent(padName) + '">' + htmlEntities(padName) + '</a>');
-        row.find('.last-edited').html(formatDate(lastEdited));
-        row.find('.user-count').html(userCount);
+        const {padName, lastEdited, userCount} = resultset;
+        const row = widget.find('#template').clone().removeAttr('id');
+        row.find('.padname').empty().append(
+            $('<a>').attr('href', `../p/${encodeURIComponent(padName)}`).text(padName));
+        row.find('.last-edited').text(formatDate(lastEdited));
+        row.find('.user-count').text(userCount);
         resultList.append(row);
       });
     } else {
