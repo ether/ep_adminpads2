@@ -37,13 +37,16 @@ exports.documentReady = async (hookName, context) => {
   const isInt = (input) => typeof input === 'number' && input % 1 === 0;
 
   const formatDate = (longtime) => {
-    let formattedDate = '';
-    if (longtime != null && isInt(longtime)) {
-      const date = new Date(longtime);
-      const month = date.getMonth() + 1;
-      formattedDate = date.getFullYear() + '-' + fillZeros(month) + '-' + fillZeros(date.getDate()) + ' ' + fillZeros(date.getHours()) + ':' + fillZeros(date.getMinutes()) + ':' + fillZeros(date.getSeconds());
-    }
-    return formattedDate;
+    if (longtime == null || !isInt(longtime)) return '';
+    const date = new Date(longtime);
+    const month = date.getMonth() + 1;
+    return (date.getFullYear() +
+            '-' + fillZeros(month) +
+            '-' + fillZeros(date.getDate()) +
+            ' ' +
+            fillZeros(date.getHours()) +
+            ':' + fillZeros(date.getMinutes()) +
+            ':' + fillZeros(date.getSeconds()));
   };
 
   const fillZeros = (x) => isInt(x) ? (x < 10 ? '0' + x : x) : '';
