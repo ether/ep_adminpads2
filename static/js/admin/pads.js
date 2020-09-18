@@ -1,7 +1,5 @@
 exports.documentReady = async (hookName, context) => {
-  if (context !== 'admin/pads') {
-    return;
-  }
+  if (context !== 'admin/pads') return;
 
   const basePath = location.pathname.split('/').slice(0, -2).join('/'); // Strip /admin/plugins.
   const socketioPath = `${basePath}/socket.io`;
@@ -72,7 +70,8 @@ exports.documentReady = async (hookName, context) => {
     $('.do-delete').off('click').click((e) => {
       const row = $(e.target).closest('tr');
       const padID = row.find('.padname').text();
-      if (confirm(_('ep_adminpads2_confirm', {padID: padID}) || `Do you really want to delete the pad ${padID}?`)) {
+      if (confirm(_('ep_adminpads2_confirm', {padID: padID}) ||
+                  `Do you really want to delete the pad ${padID}?`)) {
         doUpdate = true;
         socket.emit('delete', padID);
       }
@@ -81,9 +80,7 @@ exports.documentReady = async (hookName, context) => {
     $('#do-prev-page').off('click').click((e) => {
       const query = $('#search-results').data('query');
       query.offset -= query.limit;
-      if (query.offset < 0) {
-        query.offset = 0;
-      }
+      if (query.offset < 0) query.offset = 0;
       search();
     });
     $('#do-next-page').off('click').click((e) => {
@@ -94,7 +91,7 @@ exports.documentReady = async (hookName, context) => {
       }
       search();
     });
-  }
+  };
 
   updateHandlers();
 
