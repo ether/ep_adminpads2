@@ -14,7 +14,7 @@ const search = async (query) => {
   const {padIDs} = await padManager.listAllPads();
   const data = {
     progress: 1,
-    message: 'Search done.',
+    messageId: 'ep_adminpads2_search-done',
     query: query,
     total: padIDs.length,
   };
@@ -49,7 +49,7 @@ const search = async (query) => {
   let rs = result.slice(query.offset, query.offset + query.limit);
 
   data.results = rs.map((padName) => ({padName, lastEdited: '', userCount: 0}));
-  if (!data.results.length) data.message = 'No results';
+  if (!data.results.length) data.messageId = 'ep_adminpads2_no-results';
   await Promise.all(data.results.map(async (entry) => {
     const pad = await padManager.getPad(entry.padName);
     entry.userCount = api.padUsersCount(entry.padName).padUsersCount;
