@@ -176,7 +176,7 @@ exports.documentReady = async (hookName, context) => {
           $('<tr>').append(
               $('<td>')
                   .attr('colspan', '4')
-                  .addClass('no - results')
+                  .addClass('no-results')
                   .text(noResults)));
     }
 
