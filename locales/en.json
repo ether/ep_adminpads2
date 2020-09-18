@@ -15,7 +15,7 @@
   "ep_adminpads2_confirm": "Do you really want to delete the pad {{padID}}?",
   "ep_adminpads2_unknown-status": "Unknown status",
   "ep_adminpads2_unknown-error": "Unknown error",
-  "ep_adminpads2_search-done": "Search done",
+  "ep_adminpads2_search-done": "Search complete",
   "ep_adminpads2_no-results": "No results",
 
   "ep_adminpads2_manage-pads": "Manage pads"
