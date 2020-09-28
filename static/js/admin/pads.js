@@ -125,9 +125,9 @@ exports.documentReady = async (hookName, context) => {
     query = data.query;
     total = data.total;
 
-    $('#offset').html(query.offset);
-    $('#limit').html(limit);
-    $('#total').html(total);
+    $('#offset').text(query.offset);
+    $('#limit').text(limit);
+    $('#total').text(total);
 
     const resultList = $('#results');
     resultList.empty();
