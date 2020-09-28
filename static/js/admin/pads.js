@@ -1,3 +1,10 @@
+let query = {
+  pattern: '',
+  offset: 0,
+  limit: 12,
+};
+let total;
+
 exports.documentReady = async (hookName, context) => {
   if (context !== 'admin/pads') return;
 
@@ -11,22 +18,15 @@ exports.documentReady = async (hookName, context) => {
 
   let changeTimer;
 
-  $('#search-results').data('query', {
-    pattern: '',
-    offset: 0,
-    limit: 12,
-  });
-
   let doUpdate = false;
   const doAutoUpdate = () => $('#results-autoupdate').prop('checked');
 
   const search = () => {
     clearTimeout(changeTimer);
-    socket.emit('search', $('#search-results').data('query'));
+    socket.emit('search', query);
   };
 
   const submitSearch = () => {
-    const query = $('#search-results').data('query');
     query.pattern = $('#search-query')[0].value;
     query.offset = 0;
     search();
@@ -72,14 +72,11 @@ exports.documentReady = async (hookName, context) => {
     });
 
     $('#do-prev-page').off('click').click((e) => {
-      const query = $('#search-results').data('query');
       query.offset -= query.limit;
       if (query.offset < 0) query.offset = 0;
       search();
     });
     $('#do-next-page').off('click').click((e) => {
-      const query = $('#search-results').data('query');
-      const total = $('#search-results').data('total');
       if (query.offset + query.limit < total) {
         query.offset += query.limit;
       }
@@ -125,8 +122,8 @@ exports.documentReady = async (hookName, context) => {
       limit = data.total;
     }
 
-    widget.data('query', data.query);
-    widget.data('total', data.total);
+    query = data.query;
+    total = data.total;
 
     widget.find('.offset').html(data.query.offset);
     widget.find('.limit').html(limit);
