@@ -125,9 +125,9 @@ exports.documentReady = async (hookName, context) => {
     query = data.query;
     total = data.total;
 
-    widget.find('.offset').html(data.query.offset);
-    widget.find('.limit').html(limit);
-    widget.find('.total').html(data.total);
+    widget.find('#offset').html(data.query.offset);
+    widget.find('#limit').html(limit);
+    widget.find('#total').html(data.total);
 
     widget.find('#results *').remove();
     const resultList = widget.find('#results');
