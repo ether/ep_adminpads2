@@ -125,17 +125,17 @@ exports.documentReady = async (hookName, context) => {
     query = data.query;
     total = data.total;
 
-    widget.find('#offset').html(data.query.offset);
-    widget.find('#limit').html(limit);
-    widget.find('#total').html(data.total);
+    $('#offset').html(query.offset);
+    $('#limit').html(limit);
+    $('#total').html(total);
 
-    widget.find('#results *').remove();
-    const resultList = widget.find('#results');
+    const resultList = $('#results');
+    resultList.empty();
 
     if (data.results.length > 0) {
       data.results.forEach((resultset) => {
         const {padName, lastEdited, userCount} = resultset;
-        const row = widget.find('#template').clone().removeAttr('id');
+        const row = $('#template').clone().removeAttr('id');
         row.find('.padname').empty().append(
             $('<a>').attr('href', `../p/${encodeURIComponent(padName)}`).text(padName));
         row.find('.last-edited').text(formatDate(lastEdited));
