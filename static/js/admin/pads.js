@@ -156,6 +156,5 @@ exports.documentReady = async (hookName, context) => {
   });
 
   socket.emit('load');
-  search();
   return;
 };
