@@ -1,4 +1,4 @@
-(() => {
+$(() => {
   let query = {
     pattern: '',
     offset: 0,
@@ -154,4 +154,4 @@
   });
 
   socket.emit('load');
-})();
+});
