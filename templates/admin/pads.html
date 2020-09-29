@@ -12,47 +12,12 @@
       #results-table .no-results {font-style: italic;}
     </style>
 
-    <% e.begin_block("scripts"); %>
     <script src="../static/js/jquery.js"></script>
     <script src="../socket.io/socket.io.js"></script>
-    <script type="text/javascript" src="../static/js/require-kernel.js"></script>
     <link rel="localizations" type="application/l10n+json" href="../locales.json" />
     <script src="../static/js/html10n.js"></script>
     <script src="../static/js/l10n.js"></script>
-
-    <!-- Include base packages manually (this help with debugging) -->
-    <script type="text/javascript" src="../javascripts/lib/ep_etherpad-lite/static/js/ace2_common.js?callback=require.define"></script>
-
-    <!-- Bootstrap page -->
-    <script type="text/javascript">
-      let clientVars = {};
-      (function () {
-        let pathComponents = location.pathname.split('/');
-
-        // Strip 'p' and the padname from the pathname and set as baseURL
-        let baseURL = pathComponents.slice(0, pathComponents.length - 2).join('/') + '/';
-
-        require.setRootURI(baseURL + 'javascripts/src');
-        require.setLibraryURI(baseURL + 'javascripts/lib');
-        require.setGlobalKeyPath('require');
-
-        $ = jQuery = require('ep_etherpad-lite/static/js/rjquery').jQuery; // Expose jQuery #HACK
-
-        let plugins = require('ep_etherpad-lite/static/js/pluginfw/client_plugins');
-        let hooks = require('ep_etherpad-lite/static/js/pluginfw/hooks');
-
-        plugins.baseURL = baseURL;
-        plugins.update(function () {
-          hooks.plugins = plugins;
-
-          // Call documentReady hook
-          $(function() {
-            hooks.aCallAll('documentReady','admin/pads');
-          });
-        });
-      }());
-    </script>
-    <% e.end_block(); %>
+    <script src="../static/plugins/ep_adminpads2/static/js/admin/pads.js"></script>
   </head>
   <body>
     <div id="wrapper">

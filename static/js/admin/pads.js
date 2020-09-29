@@ -1,12 +1,10 @@
-let query = {
-  pattern: '',
-  offset: 0,
-  limit: 12,
-};
-let total;
-
-exports.documentReady = async (hookName, context) => {
-  if (context !== 'admin/pads') return;
+$(() => {
+  let query = {
+    pattern: '',
+    offset: 0,
+    limit: 12,
+  };
+  let total;
 
   const basePath = location.pathname.split('/').slice(0, -2).join('/'); // Strip /admin/plugins.
   const socketioPath = `${basePath}/socket.io`;
@@ -156,6 +154,4 @@ exports.documentReady = async (hookName, context) => {
   });
 
   socket.emit('load');
-  search();
-  return;
-};
+});

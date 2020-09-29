@@ -8,9 +8,6 @@
         "padRemove": "ep_adminpads2",
         "padCreate": "ep_adminpads2",
         "eejsBlock_adminMenu": "ep_adminpads2"
-      },
-      "client_hooks": {
-        "documentReady": "ep_adminpads2/static/js/admin/pads"
       }
     }
   ]
