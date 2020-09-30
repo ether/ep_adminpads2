@@ -127,6 +127,7 @@ $(() => {
     $('#total').text(total);
 
     if (data.results.length > 0) {
+      $('#loading').hide();
       $('#no-results').hide();
       $('#error').hide();
       const resultList = $('#results').empty();
@@ -141,6 +142,7 @@ $(() => {
       });
       $('#pad-widget').show();
     } else {
+      $('#loading').hide();
       $('#pad-widget').hide();
       $('#error').hide();
       $('#no-results').show();
@@ -150,6 +152,7 @@ $(() => {
   });
 
   socket.on('search-error', (err) => {
+    $('#loading').hide();
     $('#pad-widget').hide();
     $('#no-results').hide();
     $('#error-title')

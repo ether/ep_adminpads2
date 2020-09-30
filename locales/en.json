@@ -5,6 +5,7 @@
   "ep_adminpads2_confirm": "Do you really want to delete the pad {{padID}}?",
   "ep_adminpads2_delete.value": "Delete",
   "ep_adminpads2_last-edited": "Last edited",
+  "ep_adminpads2_loading": "Loading...",
   "ep_adminpads2_manage-pads": "Manage pads",
   "ep_adminpads2_no-results": "No results",
   "ep_adminpads2_of": "of",

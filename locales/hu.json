@@ -5,6 +5,7 @@
   "ep_adminpads2_confirm": "Biztosan törölni szeretné a(z) {{padID}} jegyzetfüzetet?",
   "ep_adminpads2_delete.value": "Törlés",
   "ep_adminpads2_last-edited": "Utoljára szerkesztve",
+  "ep_adminpads2_loading": "Loading...",
   "ep_adminpads2_manage-pads": "Jegyzetfüzetek kezelése",
   "ep_adminpads2_no-results": "Nincs találat",
   "ep_adminpads2_of": "/",
