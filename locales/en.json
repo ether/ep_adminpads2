@@ -13,6 +13,8 @@
   "ep_adminpads2_search-box.placeholder": "Search term",
   "ep_adminpads2_search-button.value": "Search",
   "ep_adminpads2_search-done": "Search complete",
+  "ep_adminpads2_search-error-explanation": "The server encountered an error while searching for pads:",
+  "ep_adminpads2_search-error-title": "Failed to get pad list",
   "ep_adminpads2_search-heading": "Search for pads",
   "ep_adminpads2_title": "Pad administration",
   "ep_adminpads2_unknown-error": "Unknown error",

@@ -13,6 +13,8 @@
   "ep_adminpads2_search-box.placeholder": "Keresési kifejezés",
   "ep_adminpads2_search-button.value": "Keresés",
   "ep_adminpads2_search-done": "Keresés befejezve",
+  "ep_adminpads2_search-error-explanation": "The server encountered an error while searching for pads:",
+  "ep_adminpads2_search-error-title": "Failed to get pad list",
   "ep_adminpads2_search-heading": "Jegyzetfüzetek keresése",
   "ep_adminpads2_title": "Jegyzetfüzet felügyelete",
   "ep_adminpads2_unknown-error": "Ismeretlen hiba",

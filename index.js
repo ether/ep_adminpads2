@@ -69,15 +69,16 @@ let io = null;
 exports.socketio = (hook_name, args) => {
   io = args.io.of('/pluginfw/admin/pads');
   io.on('connection', (socket) => {
-    socket.on('load', async (query) => {
-      let result = await search({pattern: '', offset: 0, limit: queryLimit});
-      socket.emit('search-result', result);
-    });
-
-    socket.on('search', async (query) => {
-      let result = await search(query);
-      socket.emit('search-result', result);
-    });
+    const _search = async (query) => {
+      try {
+        const result = await search(query);
+        socket.emit('search-result', result);
+      } catch (err) {
+        socket.emit('search-error', err.stack ? err.stack : err.toString());
+      }
+    };
+    socket.on('load', () => _search({pattern: '', offset: 0, limit: queryLimit}));
+    socket.on('search', _search);
 
     socket.on('delete', async (padId) => {
       let padExists = await padManager.doesPadExists(padId);
