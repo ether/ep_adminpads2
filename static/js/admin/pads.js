@@ -114,7 +114,6 @@ $(() => {
   });
 
   socket.on('search-result', (data) => {
-    const widget = $('#search-results');
     let limit = data.query.offset + data.query.limit;
     if (limit > data.total) {
       limit = data.total;
@@ -127,10 +126,11 @@ $(() => {
     $('#limit').text(limit);
     $('#total').text(total);
 
-    const resultList = $('#results');
-    resultList.empty();
-
     if (data.results.length > 0) {
+      $('#loading').hide();
+      $('#no-results').hide();
+      $('#error').hide();
+      const resultList = $('#results').empty();
       data.results.forEach((resultset) => {
         const {padName, lastEdited, userCount} = resultset;
         const row = $('#template').clone().removeAttr('id');
@@ -140,17 +140,29 @@ $(() => {
         row.find('.user-count').text(userCount);
         resultList.append(row);
       });
+      $('#pad-widget').show();
     } else {
-      const noResults = _('ep_adminpads2_no-results') || 'No results';
-      resultList.append(
-          $('<tr>').append(
-              $('<td>')
-                  .attr('colspan', '4')
-                  .addClass('no-results')
-                  .text(noResults)));
+      $('#loading').hide();
+      $('#pad-widget').hide();
+      $('#error').hide();
+      $('#no-results').show();
     }
 
     updateHandlers();
+  });
+
+  socket.on('search-error', (err) => {
+    $('#loading').hide();
+    $('#pad-widget').hide();
+    $('#no-results').hide();
+    $('#error-title')
+        .attr('data-l10n-id', 'ep_adminpads2_search-error-title')
+        .text('Failed to get pad list');
+    $('#error-explanation')
+        .attr('data-l10n-id', 'ep_adminpads2_search-error-explanation')
+        .text('The server encountered an error while searching for pads:');
+    $('#error-message').text(err.toString());
+    $('#error').show();
   });
 
   socket.emit('load');
