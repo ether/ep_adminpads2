@@ -66,7 +66,7 @@ exports.expressCreateServer = (hook_name, args, cb) => {
 
 let io = null;
 
-exports.socketio = (hook_name, args) => {
+exports.socketio = (hookName, args, cb) => {
   io = args.io.of('/pluginfw/admin/pads');
   io.on('connection', (socket) => {
     const _search = async (query) => {
@@ -90,6 +90,7 @@ exports.socketio = (hook_name, args) => {
       }
     });
   });
+  return cb();
 };
 
 const updatePads = (hookName, args, cb) => {
