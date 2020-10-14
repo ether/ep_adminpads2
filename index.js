@@ -1,7 +1,11 @@
+/* global exports, require */
+
 const $ = require('cheerio');
 const eejs = require('ep_etherpad-lite/node/eejs');
 const padManager = require('ep_etherpad-lite/node/db/PadManager');
 const api = require('ep_etherpad-lite/node/db/API');
+
+let ioNs = null;
 const queryLimit = 12;
 
 const isNumeric = (arg) => typeof arg == 'number' || (typeof arg == 'string' && parseInt(arg));
@@ -54,8 +58,8 @@ const search = async (query) => {
   return data;
 };
 
-exports.expressCreateServer = (hook_name, args, cb) => {
-  args.app.get('/admin/pads', (req, res) => {
+exports.expressCreateServer = (hookName, {app}, cb) => {
+  app.get('/admin/pads', (req, res) => {
     let render_args = {
       errors: [],
     };
@@ -64,11 +68,9 @@ exports.expressCreateServer = (hook_name, args, cb) => {
   return cb();
 };
 
-let io = null;
-
-exports.socketio = (hookName, args, cb) => {
-  io = args.io.of('/pluginfw/admin/pads');
-  io.on('connection', (socket) => {
+exports.socketio = (hookName, {io}, cb) => {
+  ioNs = io.of('/pluginfw/admin/pads');
+  ioNs.on('connection', (socket) => {
     const _search = async (query) => {
       try {
         const result = await search(query);
@@ -93,8 +95,8 @@ exports.socketio = (hookName, args, cb) => {
   return cb();
 };
 
-const updatePads = (hookName, args, cb) => {
-  io.emit('progress', {progress: 1});
+const updatePads = (hookName, context, cb) => {
+  ioNs.emit('progress', {progress: 1});
   return cb();
 };
 
