@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Robby"
+		]
+	},
+	"ep_adminpads2_delete.value": "Läschen",
+	"ep_adminpads2_loading": "Lueden...",
+	"ep_adminpads2_search-box.placeholder": "Sichbegrëff",
+	"ep_adminpads2_search-button.value": "Sichen",
+	"ep_adminpads2_unknown-error": "Onbekannte Feeler"
+}
