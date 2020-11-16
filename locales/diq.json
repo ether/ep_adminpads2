@@ -17,5 +17,11 @@
 	"ep_adminpads2_padname": "Padname",
 	"ep_adminpads2_search-box.placeholder": "termê cıgêrayış",
 	"ep_adminpads2_search-button.value": "Cı geyre",
-	"ep_adminpads2_search-done": "Cıgeyrayışi temam"
+	"ep_adminpads2_search-done": "Cıgeyrayışi temam",
+	"ep_adminpads2_search-error-explanation": "Server cıgeyrayışê pedan de yew xetaya raşt ame",
+	"ep_adminpads2_search-error-title": "Lista pedi nêgêriye",
+	"ep_adminpads2_search-heading": "Pedan cıgeyrayış",
+	"ep_adminpads2_title": "İdarey pedi",
+	"ep_adminpads2_unknown-error": "Xetaya nêzanıtiye",
+	"ep_adminpads2_unknown-status": "Weziyeto nêzanaye"
 }
