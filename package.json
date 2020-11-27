@@ -41,7 +41,7 @@
     "lint:fix": "eslint --fix ."
   },
   "engines": {
-    "lint": "eslint ."
+    "node": ">=10.13.0"
   },
   "peerDependencies": {
     "ep_etherpad-lite": ">=1.8.6"
