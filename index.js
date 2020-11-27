@@ -8,23 +8,23 @@ const api = require('ep_etherpad-lite/node/db/API');
 let ioNs = null;
 const queryLimit = 12;
 
-const isNumeric = (arg) => typeof arg == 'number' || (typeof arg == 'string' && parseInt(arg));
+const isNumeric = (arg) => typeof arg === 'number' || (typeof arg === 'string' && parseInt(arg));
 
 const search = async (query) => {
   const {padIDs} = await padManager.listAllPads();
   const data = {
     progress: 1,
     messageId: 'ep_adminpads2_search-done',
-    query: query,
+    query,
     total: padIDs.length,
   };
   let maxResult = 0;
   let result = padIDs;
   if (query.pattern != null && query.pattern !== '') {
-    let pattern = '*' + query.pattern + '*';
+    let pattern = `*${query.pattern}*`;
     pattern = regExpQuote(pattern);
     pattern = pattern.replace(/(\\\*)+/g, '.*');
-    pattern = '^' + pattern + '$';
+    pattern = `^${pattern}$`;
     const regex = new RegExp(pattern, 'i');
     result = result.filter(regex.test.bind(regex));
   }
@@ -46,7 +46,7 @@ const search = async (query) => {
     query.limit = queryLimit;
   }
 
-  let rs = result.slice(query.offset, query.offset + query.limit);
+  const rs = result.slice(query.offset, query.offset + query.limit);
 
   data.results = rs.map((padName) => ({padName, lastEdited: '', userCount: 0}));
   if (!data.results.length) data.messageId = 'ep_adminpads2_no-results';
@@ -60,7 +60,7 @@ const search = async (query) => {
 
 exports.expressCreateServer = (hookName, {app}, cb) => {
   app.get('/admin/pads', (req, res) => {
-    let render_args = {
+    const render_args = {
       errors: [],
     };
     res.send(eejs.require('ep_adminpads2/templates/admin/pads.html', render_args));
@@ -83,10 +83,10 @@ exports.socketio = (hookName, {io}, cb) => {
     socket.on('search', _search);
 
     socket.on('delete', async (padId) => {
-      let padExists = await padManager.doesPadExists(padId);
+      const padExists = await padManager.doesPadExists(padId);
       if (padExists) {
-        //pad exists, remove
-        let pad = await padManager.getPad(padId);
+        // pad exists, remove
+        const pad = await padManager.getPad(padId);
         await pad.remove();
         socket.emit('progress', {progress: 1});
       }

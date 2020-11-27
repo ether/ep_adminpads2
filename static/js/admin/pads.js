@@ -32,14 +32,12 @@ $(() => {
 
   const isInt = (input) => typeof input === 'number' && input % 1 === 0;
 
-  const formatDate = (longtime) => {
-    return (new Date(longtime)).toLocaleString(undefined, {
-      dateStyle: 'short',
-      timeStyle: 'long',
-    });
-  };
+  const formatDate = (longtime) => (new Date(longtime)).toLocaleString(undefined, {
+    dateStyle: 'short',
+    timeStyle: 'long',
+  });
 
-  const fillZeros = (x) => isInt(x) ? (x < 10 ? '0' + x : x) : '';
+  const fillZeros = (x) => isInt(x) ? (x < 10 ? `0${x}` : x) : '';
 
   const updateHandlers = () => {
     $('#progress.dialog .close').off('click').click(() => $('#progress.dialog').hide());
@@ -62,7 +60,7 @@ $(() => {
     $('.do-delete').off('click').click((e) => {
       const row = $(e.target).closest('tr');
       const padID = row.find('.padname').text();
-      if (confirm(_('ep_adminpads2_confirm', {padID: padID}) ||
+      if (confirm(_('ep_adminpads2_confirm', {padID}) ||
                   `Do you really want to delete the pad ${padID}?`)) {
         doUpdate = true;
         socket.emit('delete', padID);
