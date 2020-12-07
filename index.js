@@ -4,9 +4,13 @@ const $ = require('cheerio');
 const eejs = require('ep_etherpad-lite/node/eejs');
 const padManager = require('ep_etherpad-lite/node/db/PadManager');
 const api = require('ep_etherpad-lite/node/db/API');
+//const Cookies = require('ep_etherpad-lite/node_modules/js-cookie/src/js.cookie.js');
 
 let ioNs = null;
-const queryLimit = 12;
+
+// Sorting requires all pads to be loaded and analyzed.
+// Todo: Retrieve all Pads only 1 time and update only new or edited pads in stored array.
+const queryLimit = 35000; //12;
 
 const isNumeric = (arg) => typeof arg === 'number' || (typeof arg === 'string' && parseInt(arg));
 const regExpQuote = (x) => x.toString().replace(/[-\\^$*+?.()|[\]{}]/g, '\\$&');
@@ -19,6 +23,7 @@ const search = async (query) => {
     query,
     total: padIDs.length,
   };
+
   let maxResult = 0;
   let result = padIDs;
   if (query.pattern != null && query.pattern !== '') {
@@ -29,36 +34,36 @@ const search = async (query) => {
     const regex = new RegExp(pattern, 'i');
     result = result.filter(regex.test.bind(regex));
   }
-
+  // get Etherpad instance Statistics - no results receivedd - omitted for now
+  // data.Stats = api.getStats();
   data.total = result.length;
-
   maxResult = result.length - 1;
   if (maxResult < 0) {
     maxResult = 0;
   }
-
   if (!isNumeric(query.offset) || query.offset < 0) {
     query.offset = 0;
   } else if (query.offset > maxResult) {
     query.offset = maxResult;
   }
-
   if (!isNumeric(query.limit) || query.limit < 0) {
     query.limit = queryLimit;
   }
 
-  const rs = result.slice(query.offset, query.offset + query.limit);
-
-  data.results = rs.map((padName) => ({padName, lastEdited: '', userCount: 0}));
+  // const rs = result.slice(query.offset, query.offset + query.limit);
+  // we do not slice pad list anymore
+  const rs = result;
+  data.results = rs.map((padName) => ({padName, lastEdited: '', userCount: 0, revisions: 0, padSize: 0}));
   if (!data.results.length) data.messageId = 'ep_adminpads2_no-results';
   await Promise.all(data.results.map(async (entry) => {
     const pad = await padManager.getPad(entry.padName);
     entry.userCount = api.padUsersCount(entry.padName).padUsersCount;
     entry.lastEdited = await pad.getLastEdit();
+    entry.revisions = await pad.getHeadRevisionNumber(); //pad.savedRevisions.length;
+    entry.padSize = await pad.text().length;
   }));
   return data;
 };
-
 exports.expressCreateServer = (hookName, {app}, cb) => {
   app.get('/admin/pads', (req, res) => {
     res.send(eejs.require('ep_adminpads2/templates/admin/pads.html', {errors: []}));
@@ -79,12 +84,11 @@ exports.socketio = (hookName, {io}, cb) => {
     };
     socket.on('load', () => _search({pattern: '', offset: 0, limit: queryLimit}));
     socket.on('search', _search);
-
     socket.on('delete', async (padId) => {
-      const padExists = await padManager.doesPadExists(padId);
+      let padExists = await padManager.doesPadExists(padId);
       if (padExists) {
-        // pad exists, remove
-        const pad = await padManager.getPad(padId);
+        //pad exists, remove
+        let pad = await padManager.getPad(padId);
         await pad.remove();
         socket.emit('progress', {progress: 1});
       }
