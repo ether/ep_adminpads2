@@ -4,7 +4,7 @@ ToDo: AutoUpdate input has been disabled because it is not working
 -->
 <html>
   <head>
-    <title data-l10n-id="ep_adminpads3_title">Pad administration</title>
+    <title data-l10n-id="ep_adminpads2_title">Pad administration</title>
     <meta name="viewport" content="width=device-width">
     <link rel="stylesheet" href="../static/css/admin.css">
     <style type="text/css">
@@ -60,7 +60,7 @@ ToDo: AutoUpdate input has been disabled because it is not working
     width: 100%;
     height: 100%;
     /*z-index: 9999; */
-    background: url('../static/plugins/ep_adminpads3/static/js/admin/img/Loading.gif') 50% 50% no-repeat rgb(249,249,249);
+    background: url('../static/plugins/ep_adminpads2/static/js/admin/img/Loading.gif') 50% 50% no-repeat rgb(249,249,249);
     opacity: 0.4;
     }
 
@@ -71,8 +71,8 @@ ToDo: AutoUpdate input has been disabled because it is not working
     <link rel="localizations" type="application/l10n+json" href="../locales.json" />
     <script src="../static/js/html10n.js"></script>
     <script src="../static/js/l10n.js"></script>
-    <script src="../static/plugins/ep_adminpads3/static/js/admin/js-cookie/src/js.cookie.js"></script>
-    <script src="../static/plugins/ep_adminpads3/static/js/admin/pads.js"></script>
+    <script src="../static/plugins/ep_adminpads2/static/js/admin/js-cookie/src/js.cookie.js"></script>
+    <script src="../static/plugins/ep_adminpads2/static/js/admin/pads.js"></script>
   </head>
   <body>
     <div id="wrapper">
@@ -97,38 +97,38 @@ ToDo: AutoUpdate input has been disabled because it is not working
 
       <div class="innerwrapper">
         <div class="paged listing">
-          <h2 data-l10n-id="ep_adminpads3_search-heading">Pad Admins</h2>
+          <h2 data-l10n-id="ep_adminpads2_search-heading">Pad Admins</h2>
           <form name="search-form" id="search-form">
-            <input type="text" name="search" placeholder="Search Pad by name" id="search-query" data-l10n-id="ep_adminpads3_search-box.placeholder">
-            <input type="button" value="Search" id="do-search" data-l10n-id="ep_adminpads3_search-button.value">
+            <input type="text" name="search" placeholder="Search Pad by name" id="search-query" data-l10n-id="ep_adminpads2_search-box.placeholder">
+            <input type="button" value="Search" id="do-search" data-l10n-id="ep_adminpads2_search-button.value">
 	  
-	  <!--label for="results-autoupdate" data-l10n-id="ep_adminpads3_autoupdate-label" checked="true">Auto-update on pad changes</label>
+	  <!--label for="results-autoupdate" data-l10n-id="ep_adminpads2_autoupdate-label" checked="true">Auto-update on pad changes</label>
 	  <input type="checkbox"  name="autoupdate" id="results-autoupdate" title="Enables or disables automatic updates for the current query." 
-		data-l10n-id="ep_adminpads3_autoupdate.title"-->
+		data-l10n-id="ep_adminpads2_autoupdate.title"-->
 	  <br>
-	  <span data-l10n-id="ep_adminpads3_statistics">Statistics</span>: 
+	  <span data-l10n-id="ep_adminpads2_statistics">Statistics</span>: 
 	  <b>Pads Text Size</b>: <span id="padsizetotal">...</span>
 	  &nbsp; - <b>Total Pads</b>: <span id="totalPads">...</span>
 	  &nbsp; - <b>Active Users</b>: <span id="activeusers">...</span>
           </form>
           
           <div id="search-results">
-            <div class="loading" id="loading" data-l10n-id="ep_adminpads3_loading">Loading…</div>
+            <div class="loading" id="loading" data-l10n-id="ep_adminpads2_loading">Loading…</div>
             <div id="pad-widget">
               <table id="results-table">
                 <thead>
                   <tr>
                     <th class="padname"><a href="?sortby=padName"    
-			style="text-decoration: underline;"><span data-l10n-id="ep_adminpads3_padname" id="padName">Pad name</span></a></th>
+			style="text-decoration: underline;"><span data-l10n-id="ep_adminpads2_padname" id="padName">Pad name</span></a></th>
                     <th class="last-edited"><a href="?sortby=lastEdited" 
-			style="text-decoration: underline;"><span data-l10n-id="ep_adminpads3_last-edited" id="lastEdited">Last edited</span></a></th>
+			style="text-decoration: underline;"><span data-l10n-id="ep_adminpads2_last-edited" id="lastEdited">Last edited</span></a></th>
                     <th class="Size"><a href="?sortby=padSize"    
-			style="text-decoration: underline;"><span data-l10n-id="ep_adminpads3_padsize" id="padSize">Size</span></a></th>
+			style="text-decoration: underline;"><span data-l10n-id="ep_adminpads2_padsize" id="padSize">Size</span></a></th>
                     <th class="user-count" style="text-align:right;"><a href="?sortby=userCount"  
-			style="text-decoration: underline;"><span data-l10n-id="ep_adminpads3_pad-user-count" id="userCount">Active users</span></a></th>
+			style="text-decoration: underline;"><span data-l10n-id="ep_adminpads2_pad-user-count" id="userCount">Active users</span></a></th>
                     <th class="Revisions"><a href="?sortby=revisions"  
-			style="text-decoration: underline;"><span data-l10n-id="ep_adminpads3_padrevisions" id="revisions">Revisions</span></a></th>
-                    <th class="actions" data-l10n-id="ep_adminpads3_action">Action</th>
+			style="text-decoration: underline;"><span data-l10n-id="ep_adminpads2_padrevisions" id="revisions">Revisions</span></a></th>
+                    <th class="actions" data-l10n-id="ep_adminpads2_action">Action</th>
                   </tr>
                 </thead>
                 <tbody class="template">
@@ -139,7 +139,7 @@ ToDo: AutoUpdate input has been disabled because it is not working
                     <td class="user-count"></td>
                     <td class="Revisions"></td>
                     <td class="actions">
-                      <input type="button" value="Delete" class="do-delete" data-l10n-id="ep_adminpads3_delete.value">
+                      <input type="button" value="Delete" class="do-delete" data-l10n-id="ep_adminpads2_delete.value">
                     </td>
                   </tr>
                 </tbody>
@@ -150,7 +150,7 @@ ToDo: AutoUpdate input has been disabled because it is not working
               <span id="offset"></span>..<span id="limit"></span> / <span id="total"></span>
               <input type="button" value="&gt;&gt;" id="do-next-page">
             </div>
-            <div id="no-results" data-l10n-id="ep_adminpads3_no-results">No results</div>
+            <div id="no-results" data-l10n-id="ep_adminpads2_no-results">No results</div>
 	    <div id="showObj" style="display:none;"></div>
             <div id="error">
               <div id="error-title"></div>

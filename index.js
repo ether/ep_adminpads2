@@ -19,7 +19,7 @@ const search = async (query) => {
   const {padIDs} = await padManager.listAllPads();
   const data = {
     progress: 1,
-    messageId: 'ep_adminpads3_search-done',
+    messageId: 'ep_adminpads2_search-done',
     query,
     total: padIDs.length,
   };
@@ -54,7 +54,7 @@ const search = async (query) => {
   // we do not slice pad list anymore
   const rs = result;
   data.results = rs.map((padName) => ({padName, lastEdited: '', userCount: 0, revisions: 0, padSize: 0}));
-  if (!data.results.length) data.messageId = 'ep_adminpads3_no-results';
+  if (!data.results.length) data.messageId = 'ep_adminpads2_no-results';
   await Promise.all(data.results.map(async (entry) => {
     const pad = await padManager.getPad(entry.padName);
     entry.userCount = api.padUsersCount(entry.padName).padUsersCount;
@@ -66,7 +66,7 @@ const search = async (query) => {
 };
 exports.expressCreateServer = (hookName, {app}, cb) => {
   app.get('/admin/pads', (req, res) => {
-    res.send(eejs.require('ep_adminpads3/templates/admin/pads.html', {errors: []}));
+    res.send(eejs.require('ep_adminpads2/templates/admin/pads.html', {errors: []}));
   });
   return cb();
 };
@@ -112,7 +112,7 @@ exports.eejsBlock_adminMenu = (hookName, context, cb) => {
       $('<li>').append(
           $('<a>')
               .attr('href', `${pfx}pads`)
-              .attr('data-l10n-id', 'ep_adminpads3_manage-pads')
+              .attr('data-l10n-id', 'ep_adminpads2_manage-pads')
               .text('Manage pads')));
   context.content = ul.html();
   return cb();
