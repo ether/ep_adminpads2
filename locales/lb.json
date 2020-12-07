@@ -4,9 +4,9 @@
 			"Robby"
 		]
 	},
-	"ep_adminpads2_delete.value": "Läschen",
-	"ep_adminpads2_loading": "Lueden...",
-	"ep_adminpads2_search-box.placeholder": "Sichbegrëff",
-	"ep_adminpads2_search-button.value": "Sichen",
-	"ep_adminpads2_unknown-error": "Onbekannte Feeler"
+	"ep_adminpads3_delete.value": "Läschen",
+	"ep_adminpads3_loading": "Lueden...",
+	"ep_adminpads3_search-box.placeholder": "Sichbegrëff",
+	"ep_adminpads3_search-button.value": "Sichen",
+	"ep_adminpads3_unknown-error": "Onbekannte Feeler"
 }

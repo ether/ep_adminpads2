@@ -1,13 +1,13 @@
 {
   "parts": [
     {
-      "name": "ep_adminpads2",
+      "name": "ep_adminpads3",
       "hooks": {
-        "expressCreateServer": "ep_adminpads2",
-        "socketio": "ep_adminpads2",
-        "padRemove": "ep_adminpads2",
-        "padCreate": "ep_adminpads2",
-        "eejsBlock_adminMenu": "ep_adminpads2"
+        "expressCreateServer": "ep_adminpads3",
+        "socketio": "ep_adminpads3",
+        "padRemove": "ep_adminpads3",
+        "padCreate": "ep_adminpads3",
+        "eejsBlock_adminMenu": "ep_adminpads3"
       }
     }
   ]

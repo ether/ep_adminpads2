@@ -19,7 +19,7 @@ To be Done:
 - Automatic Updates on pad changes don't work and the checkbox has been temporarily disabled.
 
 This is a fork of
-[ep_adminpads2](https://github.com/ether/ep_adminpads2), which has no sorting capabilities
+[ep_adminpads3](https://github.com/ether/ep_adminpads3), which has no sorting capabilities
 
 [ep_adminpads](https://github.com/spcsser/ep_adminpads), which is no
 longer maintained.

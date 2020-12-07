@@ -71,7 +71,7 @@ $(() => {
     $('.do-delete').off('click').click((e) => {
       const row = $(e.target).closest('tr');
       const padID = row.find('.padname').text();
-      if (confirm(_('ep_adminpads2_confirm', {padID}) ||
+      if (confirm(_('ep_adminpads3_confirm', {padID}) ||
                   `Do you really want to delete the pad ${padID}?`)) {
         doUpdate = true;
         socket.emit('delete', padID);
@@ -102,10 +102,10 @@ $(() => {
     const message = $('<span>');
     if (data.isError) {
       message.addClass('error');
-      message.text(_(data.messageId) || _('ep_adminpads2_unknown-error') || 'Unknown error');
+      message.text(_(data.messageId) || _('ep_adminpads3_unknown-error') || 'Unknown error');
     } else {
       message.addClass('status');
-      message.text(_(data.messageId) || _('ep_adminpads2_unknown-status') || 'Unknown status');
+      message.text(_(data.messageId) || _('ep_adminpads3_unknown-status') || 'Unknown status');
     }
     $('#progress .message').empty().append(message);
 
@@ -218,10 +218,10 @@ $(() => {
     $('#pad-widget').hide();
     $('#no-results').hide();
     $('#error-title')
-        .attr('data-l10n-id', 'ep_adminpads2_search-error-title')
+        .attr('data-l10n-id', 'ep_adminpads3_search-error-title')
         .text('Failed to get pad list');
     $('#error-explanation')
-        .attr('data-l10n-id', 'ep_adminpads2_search-error-explanation')
+        .attr('data-l10n-id', 'ep_adminpads3_search-error-explanation')
         .text('The server encountered an error while searching for pads:');
     $('#error-message').text(err.toString());
     $('#error').show();
