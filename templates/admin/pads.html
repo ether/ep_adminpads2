@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<!--
+ToDo: AutoUpdate input has been disabled because it is not working 
+-->
 <html>
   <head>
     <title data-l10n-id="ep_adminpads2_title">Pad administration</title>
@@ -11,6 +14,8 @@
       #results-table .padname {text-align: left;}
       #results-table .last-edited {text-align: center; width: 1%; white-space: nowrap;}
       #results-table .user-count {text-align: right; width: 1%; white-space: nowrap;}
+      #results-table .Size {text-align: right; width: 1%; white-space: nowrap;}
+      #results-table .Revisions {text-align: right; width: 1%; white-space: nowrap;}
       #results-table .actions {text-align: center; width: 1%; white-space: nowrap;}
       #loading, #no-results {font-style: italic;}
       #no-results {display: none;}
@@ -48,6 +53,17 @@
       #error-message-scrollbox {
         overflow-x: auto;
       }
+    .loading {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    /*z-index: 9999; */
+    background: url('../static/plugins/ep_adminpads2/static/js/admin/img/Loading.gif') 50% 50% no-repeat rgb(249,249,249);
+    opacity: 0.4;
+    }
+
     </style>
 
     <script src="../static/js/jquery.js"></script>
@@ -55,6 +71,7 @@
     <link rel="localizations" type="application/l10n+json" href="../locales.json" />
     <script src="../static/js/html10n.js"></script>
     <script src="../static/js/l10n.js"></script>
+    <script src="../static/plugins/ep_adminpads2/static/js/admin/js-cookie/src/js.cookie.js"></script>
     <script src="../static/plugins/ep_adminpads2/static/js/admin/pads.js"></script>
   </head>
   <body>
@@ -80,22 +97,37 @@
 
       <div class="innerwrapper">
         <div class="paged listing">
-          <h2 data-l10n-id="ep_adminpads2_search-heading">Search for pads</h2>
+          <h2 data-l10n-id="ep_adminpads2_search-heading">Pad Admins</h2>
           <form name="search-form" id="search-form">
-            <input type="text" name="search" placeholder="Search term" id="search-query" data-l10n-id="ep_adminpads2_search-box.placeholder">
+            <input type="text" name="search" placeholder="Search Pad by name" id="search-query" data-l10n-id="ep_adminpads2_search-box.placeholder">
             <input type="button" value="Search" id="do-search" data-l10n-id="ep_adminpads2_search-button.value">
+	  
+	  <!--label for="results-autoupdate" data-l10n-id="ep_adminpads2_autoupdate-label" checked="true">Auto-update on pad changes</label>
+	  <input type="checkbox"  name="autoupdate" id="results-autoupdate" title="Enables or disables automatic updates for the current query." 
+		data-l10n-id="ep_adminpads2_autoupdate.title"-->
+	  <br>
+	  <span data-l10n-id="ep_adminpads2_statistics">Statistics</span>: 
+	  <b>Pads Text Size</b>: <span id="padsizetotal">...</span>
+	  &nbsp; - <b>Total Pads</b>: <span id="totalPads">...</span>
+	  &nbsp; - <b>Active Users</b>: <span id="activeusers">...</span>
           </form>
-          <input type="checkbox" name="autoupdate" id="results-autoupdate" title="Enables or disables automatic updates for the current query." data-l10n-id="ep_adminpads2_autoupdate.title">
-          <label for="results-autoupdate" data-l10n-id="ep_adminpads2_autoupdate-label">Auto-update on pad changes</label>
+          
           <div id="search-results">
-            <div id="loading" data-l10n-id="ep_adminpads2_loading">Loading…</div>
+            <div class="loading" id="loading" data-l10n-id="ep_adminpads2_loading">Loading…</div>
             <div id="pad-widget">
               <table id="results-table">
                 <thead>
                   <tr>
-                    <th class="padname" data-l10n-id="ep_adminpads2_padname">Padname</th>
-                    <th class="last-edited" data-l10n-id="ep_adminpads2_last-edited">Last edited</th>
-                    <th class="user-count" data-l10n-id="ep_adminpads2_pad-user-count">Pad user count</th>
+                    <th class="padname"><a href="?sortby=padName"    
+			style="text-decoration: underline;"><span data-l10n-id="ep_adminpads2_padname" id="padName">Pad name</span></a></th>
+                    <th class="last-edited"><a href="?sortby=lastEdited" 
+			style="text-decoration: underline;"><span data-l10n-id="ep_adminpads2_last-edited" id="lastEdited">Last edited</span></a></th>
+                    <th class="Size"><a href="?sortby=padSize"    
+			style="text-decoration: underline;"><span data-l10n-id="ep_adminpads2_padsize" id="padSize">Size</span></a></th>
+                    <th class="user-count" style="text-align:right;"><a href="?sortby=userCount"  
+			style="text-decoration: underline;"><span data-l10n-id="ep_adminpads2_pad-user-count" id="userCount">Active users</span></a></th>
+                    <th class="Revisions"><a href="?sortby=revisions"  
+			style="text-decoration: underline;"><span data-l10n-id="ep_adminpads2_padrevisions" id="revisions">Revisions</span></a></th>
                     <th class="actions" data-l10n-id="ep_adminpads2_action">Action</th>
                   </tr>
                 </thead>
@@ -103,7 +135,9 @@
                   <tr id="template">
                     <td class="padname"></td>
                     <td class="last-edited"></td>
+                    <td class="Size"></td>
                     <td class="user-count"></td>
+                    <td class="Revisions"></td>
                     <td class="actions">
                       <input type="button" value="Delete" class="do-delete" data-l10n-id="ep_adminpads2_delete.value">
                     </td>
@@ -117,6 +151,7 @@
               <input type="button" value="&gt;&gt;" id="do-next-page">
             </div>
             <div id="no-results" data-l10n-id="ep_adminpads2_no-results">No results</div>
+	    <div id="showObj" style="display:none;"></div>
             <div id="error">
               <div id="error-title"></div>
               <div id="error-explanation"></div>
