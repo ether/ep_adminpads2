@@ -1,4 +1,4 @@
-/* global exports, require */
+'use strict';
 
 const $ = require('cheerio');
 const eejs = require('ep_etherpad-lite/node/eejs');
@@ -9,6 +9,7 @@ let ioNs = null;
 const queryLimit = 12;
 
 const isNumeric = (arg) => typeof arg === 'number' || (typeof arg === 'string' && parseInt(arg));
+const regExpQuote = (x) => x.toString().replace(/[-\\^$*+?.()|[\]{}]/g, '\\$&');
 
 const search = async (query) => {
   const {padIDs} = await padManager.listAllPads();
@@ -60,10 +61,7 @@ const search = async (query) => {
 
 exports.expressCreateServer = (hookName, {app}, cb) => {
   app.get('/admin/pads', (req, res) => {
-    const render_args = {
-      errors: [],
-    };
-    res.send(eejs.require('ep_adminpads2/templates/admin/pads.html', render_args));
+    res.send(eejs.require('ep_adminpads2/templates/admin/pads.html', {errors: []}));
   });
   return cb();
 };
@@ -115,5 +113,3 @@ exports.eejsBlock_adminMenu = (hookName, context, cb) => {
   context.content = ul.html();
   return cb();
 };
-
-const regExpQuote = (x) => x.toString().replace(/[-\\^$*+?.()|[\]{}]/g, '\\$&');

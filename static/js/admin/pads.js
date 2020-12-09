@@ -1,3 +1,6 @@
+/* global _ */
+'use strict';
+
 $(() => {
   let query = {
     pattern: '',
@@ -30,14 +33,10 @@ $(() => {
     search();
   };
 
-  const isInt = (input) => typeof input === 'number' && input % 1 === 0;
-
   const formatDate = (longtime) => (new Date(longtime)).toLocaleString(undefined, {
     dateStyle: 'short',
     timeStyle: 'long',
   });
-
-  const fillZeros = (x) => isInt(x) ? (x < 10 ? `0${x}` : x) : '';
 
   const updateHandlers = () => {
     $('#progress.dialog .close').off('click').click(() => $('#progress.dialog').hide());
