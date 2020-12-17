@@ -1,13 +1,16 @@
 {
 	"@metadata": {
 		"authors": [
-			"Megakott"
+			"Megakott",
+			"Okras"
 		]
 	},
 	"ep_adminpads2_action": "Действие",
 	"ep_adminpads2_delete.value": "Удалить",
 	"ep_adminpads2_last-edited": "Последнее изменение",
+	"ep_adminpads2_loading": "Загрузка…",
 	"ep_adminpads2_no-results": "Нет результатов",
+	"ep_adminpads2_search-button.value": "Найти",
 	"ep_adminpads2_unknown-error": "Неизвестная ошибка",
 	"ep_adminpads2_unknown-status": "Неизвестный статус"
 }
