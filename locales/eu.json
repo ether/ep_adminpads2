@@ -13,6 +13,8 @@
 	"ep_adminpads2_loading": "Kargatzen...",
 	"ep_adminpads2_manage-pads": "Kudeatu pad-ak",
 	"ep_adminpads2_no-results": "Emaitzarik ez",
+	"ep_adminpads2_pad-user-count": "Pad-erabiltzaile kopurua",
+	"ep_adminpads2_padname": "Pad-izena",
 	"ep_adminpads2_search-box.placeholder": "Bilaketa testua",
 	"ep_adminpads2_search-button.value": "Bilatu",
 	"ep_adminpads2_search-done": "Bilaketa osatu da",
