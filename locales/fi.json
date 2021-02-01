@@ -1,13 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
+			"Kyykaarme",
 			"Maantietäjä"
 		]
 	},
 	"ep_adminpads2_last-edited": "Viimeksi muokattu",
 	"ep_adminpads2_loading": "Ladataan...",
 	"ep_adminpads2_manage-pads": "Hallitse muistioita",
-	"ep_adminpads2_no-results": "Ei tuloksia.",
+	"ep_adminpads2_no-results": "Ei tuloksia",
 	"ep_adminpads2_pad-user-count": "Pad-käyttäjien määrä",
 	"ep_adminpads2_padname": "Tyynyn nimi",
 	"ep_adminpads2_search-box.placeholder": "Haettava teksti",
