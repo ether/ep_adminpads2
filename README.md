@@ -1,3 +1,4 @@
+![Publish Status](https://github.com/ether/ep_adminpads2/workflows/Node.js%20Package/badge.svg) ![Publish Status](https://github.com/ether/ep_adminpads2/workflows/Node.js%20Package/badge.svg)
 # Administrate Etherpads
 ===========
 
