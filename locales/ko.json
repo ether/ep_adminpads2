@@ -4,6 +4,9 @@
 			"Ykhwong"
 		]
 	},
+	"ep_adminpads2_action": "동작",
+	"ep_adminpads2_autoupdate-label": "패드 변경 시 자동 업데이트",
+	"ep_adminpads2_autoupdate.title": "현재 쿼리의 자동 업데이트를 활성화하거나 비활성화합니다.",
 	"ep_adminpads2_confirm": "{{padID}} 패드를 삭제하시겠습니까?",
 	"ep_adminpads2_delete.value": "삭제",
 	"ep_adminpads2_last-edited": "최근 편집",
