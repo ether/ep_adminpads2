@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Ykhwong"
+			"Ykhwong",
+			"그냥기여자"
 		]
 	},
 	"ep_adminpads2_action": "동작",
@@ -15,6 +16,7 @@
 	"ep_adminpads2_no-results": "결과 없음",
 	"ep_adminpads2_pad-user-count": "패드 사용자 수",
 	"ep_adminpads2_padname": "패드 이름",
+	"ep_adminpads2_search-box.placeholder": "검색어",
 	"ep_adminpads2_search-button.value": "검색",
 	"ep_adminpads2_search-done": "검색 완료",
 	"ep_adminpads2_search-error-explanation": "패드 검색 중 서버에 오류가 발생했습니다:",
