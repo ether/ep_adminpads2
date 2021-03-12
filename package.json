@@ -1,6 +1,6 @@
 {
   "name": "ep_adminpads2",
-  "version": "2.1.29",
+  "version": "2.1.30",
   "description": "Etherpad plugin to list and delete pads in /admin.",
   "keywords": [
     "etherpad",
