@@ -1,0 +1,20 @@
+{
+	"@metadata": {
+		"authors": [
+			"Lorisobi",
+			"Zunkelty"
+		]
+	},
+	"ep_adminpads2_action": "Aktion",
+	"ep_adminpads2_autoupdate-label": "Automatisch bei Änderungen am Pad updaten",
+	"ep_adminpads2_delete.value": "Löschen",
+	"ep_adminpads2_last-edited": "Zuletzt bearbeitet",
+	"ep_adminpads2_loading": "Lädt...",
+	"ep_adminpads2_manage-pads": "Pads verwalten",
+	"ep_adminpads2_no-results": "Keine Ergebnisse",
+	"ep_adminpads2_pad-user-count": "Nutzerzahl des Pads",
+	"ep_adminpads2_padname": "Padname",
+	"ep_adminpads2_search-box.placeholder": "Suchbegriff",
+	"ep_adminpads2_search-button.value": "Suche",
+	"ep_adminpads2_search-done": "Suche vollendet"
+}
