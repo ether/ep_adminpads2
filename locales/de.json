@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Lorisobi",
+			"Umlaut",
 			"Zunkelty"
 		]
 	},
@@ -16,5 +17,7 @@
 	"ep_adminpads2_padname": "Padname",
 	"ep_adminpads2_search-box.placeholder": "Suchbegriff",
 	"ep_adminpads2_search-button.value": "Suche",
-	"ep_adminpads2_search-done": "Suche vollendet"
+	"ep_adminpads2_search-done": "Suche vollendet",
+	"ep_adminpads2_unknown-error": "Unbekannter Fehler",
+	"ep_adminpads2_unknown-status": "Unbekannter Status"
 }
