@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Kyykaarme",
-			"Maantietäjä"
+			"Maantietäjä",
+			"Yupik"
 		]
 	},
 	"ep_adminpads2_last-edited": "Viimeksi muokattu",
@@ -16,5 +17,6 @@
 	"ep_adminpads2_search-done": "Haku valmis",
 	"ep_adminpads2_search-error-explanation": "Palvelimessa tapahtui virhe etsiessään tyynyjä:",
 	"ep_adminpads2_search-error-title": "Pad-luettelon hakeminen epäonnistui",
-	"ep_adminpads2_search-heading": "Etsi sisältöä"
+	"ep_adminpads2_search-heading": "Etsi sisältöä",
+	"ep_adminpads2_unknown-error": "Tuntematon virhe"
 }
