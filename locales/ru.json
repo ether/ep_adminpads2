@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"DDPAT",
 			"Megakott",
 			"Okras"
 		]
@@ -16,6 +17,7 @@
 	"ep_adminpads2_no-results": "Нет результатов",
 	"ep_adminpads2_pad-user-count": "Количество пользователей документа",
 	"ep_adminpads2_padname": "Название документа",
+	"ep_adminpads2_search-box.placeholder": "Искать термин",
 	"ep_adminpads2_search-button.value": "Найти",
 	"ep_adminpads2_search-done": "Поиск завершён",
 	"ep_adminpads2_search-error-explanation": "Сервер обнаружил ошибку при поиске документов:",
