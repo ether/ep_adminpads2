@@ -14,6 +14,8 @@
 	"ep_adminpads2_search-box.placeholder": "Tèrme de recèrca",
 	"ep_adminpads2_search-button.value": "Recercar",
 	"ep_adminpads2_search-done": "Recèrca acabada",
+	"ep_adminpads2_search-heading": "Cercar de pads",
+	"ep_adminpads2_title": "Administracion de pad",
 	"ep_adminpads2_unknown-error": "Error desconeguda",
 	"ep_adminpads2_unknown-status": "Estat desconegut"
 }
