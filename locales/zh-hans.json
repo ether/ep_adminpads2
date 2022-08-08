@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"GuoPC",
+			"Lakejason0",
 			"沈澄心"
 		]
 	},
@@ -11,7 +12,7 @@
 	"ep_adminpads2_confirm": "您确定要删除记事本 {{padID}}？",
 	"ep_adminpads2_delete.value": "删除",
 	"ep_adminpads2_last-edited": "上次编辑于",
-	"ep_adminpads2_loading": "正在载入……",
+	"ep_adminpads2_loading": "正在加载…",
 	"ep_adminpads2_manage-pads": "管理记事本",
 	"ep_adminpads2_no-results": "没有结果",
 	"ep_adminpads2_pad-user-count": "记事本用户数",
