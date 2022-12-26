@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Artnay",
 			"Kyykaarme",
 			"MITO",
 			"Maantietäjä",
@@ -21,5 +22,6 @@
 	"ep_adminpads2_search-error-explanation": "Palvelimessa tapahtui virhe etsiessään muistioita:",
 	"ep_adminpads2_search-error-title": "Pad-luettelon hakeminen epäonnistui",
 	"ep_adminpads2_search-heading": "Etsi sisältöä",
-	"ep_adminpads2_unknown-error": "Tuntematon virhe"
+	"ep_adminpads2_unknown-error": "Tuntematon virhe",
+	"ep_adminpads2_unknown-status": "Tuntematon tila"
 }
