@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Brettchenweber",
+			"Justman10000",
 			"Lorisobi",
 			"Umlaut",
 			"Zunkelty"
@@ -24,6 +25,7 @@
 	"ep_adminpads2_search-error-explanation": "Der Server ist bei der Suche nach Pads auf einen Fehler gestoßen:",
 	"ep_adminpads2_search-error-title": "Pad-Liste konnte nicht abgerufen werden",
 	"ep_adminpads2_search-heading": "Nach Pads suchen",
+	"ep_adminpads2_title": "Pad-Verwaltung",
 	"ep_adminpads2_unknown-error": "Unbekannter Fehler",
 	"ep_adminpads2_unknown-status": "Unbekannter Status"
 }
