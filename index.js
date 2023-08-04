@@ -47,15 +47,19 @@ const search = async (query) => {
     query.limit = queryLimit;
   }
 
-  const rs = result.slice(query.offset, query.offset + query.limit);
-
-  data.results = rs.map((padName) => ({padName, lastEdited: '', userCount: 0}));
+  data.results = result.map((padName) => ({padName, lastEdited: '', userCount: 0}));
   if (!data.results.length) data.messageId = 'ep_adminpads2_no-results';
   await Promise.all(data.results.map(async (entry) => {
     const pad = await padManager.getPad(entry.padName);
     entry.userCount = api.padUsersCount(entry.padName).padUsersCount;
     entry.lastEdited = await pad.getLastEdit();
   }));
+
+  const sorted = data.results.sort(function(a, b) {
+    return a.lastEdited - b.lastEdited;
+  });
+  data.results = sorted.slice(query.offset, query.offset + query.limit);
+
   return data;
 };
 
