@@ -19,7 +19,7 @@ const search = async (query) => {
     query,
     total: padIDs.length,
   };
-  let maxResult = 0;
+  let maxResult;
   let result = padIDs;
   if (query.pattern != null && query.pattern !== '') {
     let pattern = `*${query.pattern}*`;
@@ -55,9 +55,7 @@ const search = async (query) => {
     entry.lastEdited = await pad.getLastEdit();
   }));
 
-  const sorted = data.results.sort(function(a, b) {
-    return a.lastEdited - b.lastEdited;
-  });
+  const sorted = data.results.sort((a, b) => a.lastEdited - b.lastEdited);
   data.results = sorted.slice(query.offset, query.offset + query.limit);
 
   return data;
