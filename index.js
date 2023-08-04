@@ -1,6 +1,6 @@
 'use strict';
 
-const $ = require('cheerio');
+const $ = require('cheerio').load('');
 const eejs = require('ep_etherpad-lite/node/eejs');
 const padManager = require('ep_etherpad-lite/node/db/PadManager');
 const api = require('ep_etherpad-lite/node/db/API');
