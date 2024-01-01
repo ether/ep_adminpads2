@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"HellojoeAoPS",
 			"Kly"
 		]
 	},
@@ -13,9 +14,9 @@
 	"ep_adminpads2_loading": "載入中…",
 	"ep_adminpads2_manage-pads": "管理記事本",
 	"ep_adminpads2_no-results": "沒有結果",
-	"ep_adminpads2_pad-user-count": "記事本使用者計數",
+	"ep_adminpads2_pad-user-count": "記事本使用者數",
 	"ep_adminpads2_padname": "記事本名稱",
-	"ep_adminpads2_search-box.placeholder": "搜尋字詞",
+	"ep_adminpads2_search-box.placeholder": "搜尋關鍵字",
 	"ep_adminpads2_search-button.value": "搜尋",
 	"ep_adminpads2_search-done": "搜尋完成",
 	"ep_adminpads2_search-error-explanation": "當搜尋記事本時伺服器發生錯誤：",
