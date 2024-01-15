@@ -4,7 +4,8 @@
 			"DDPAT",
 			"Ice bulldog",
 			"Megakott",
-			"Okras"
+			"Okras",
+			"Pacha Tchernof"
 		]
 	},
 	"ep_adminpads2_action": "Действие",
@@ -13,7 +14,7 @@
 	"ep_adminpads2_confirm": "Вы действительно хотите удалить документ {{padID}}?",
 	"ep_adminpads2_delete.value": "Удалить",
 	"ep_adminpads2_last-edited": "Последнее изменение",
-	"ep_adminpads2_loading": "Загрузка…",
+	"ep_adminpads2_loading": "Загружается…",
 	"ep_adminpads2_manage-pads": "Управление документами",
 	"ep_adminpads2_no-results": "Нет результатов",
 	"ep_adminpads2_pad-user-count": "Количество пользователей документа",
