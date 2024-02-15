@@ -77,7 +77,7 @@ jobs:
       # ep_etherpad-lite in the plugin's node_modules prevents lint errors and
       # unit test failures if the plugin does `require('ep_etherpad-lite/foo')`.
       -
-        run: pnpm install --no-save ep_etherpad-lite@file:../etherpad-lite/src
+        run: pnpm install ep_etherpad-lite@file:../etherpad-lite/src
       -
         run: pnpm test
       -
