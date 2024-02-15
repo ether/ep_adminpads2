@@ -79,7 +79,10 @@ jobs:
       -
         run: pnpm install ep_etherpad-lite@file:../etherpad-lite/src
       -
-        run: pnpm test
+        run: |
+          ls -lisa
+          pwd
+          pnpm run test
       -
         run: pnpm run lint
 
