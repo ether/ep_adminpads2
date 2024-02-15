@@ -58,6 +58,8 @@ jobs:
               key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
               restore-keys: |
                 ${{ runner.os }}-pnpm-store-
+      - name: Only install direct dependencies
+        run: pnpm config set auto-install-peers false
       # All of ep_etherpad-lite's devDependencies are installed because the
       # plugin might do `require('ep_etherpad-lite/node_modules/${devDep}')`.
       # Eventually it would be nice to create an ESLint plugin that prohibits
