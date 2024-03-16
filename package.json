@@ -25,16 +25,16 @@
     "url": "https://etherpad.org/"
   },
   "devDependencies": {
-    "eslint": "^8.56.0",
+    "eslint": "^8.57.0",
     "eslint-config-etherpad": "^3.0.22",
-    "typescript": "^4.9.5"
+    "typescript": "^5.4.2"
   },
   "scripts": {
     "lint": "eslint .",
     "lint:fix": "eslint --fix ."
   },
   "engines": {
-    "node": ">=12.17.0"
+    "node": ">=18.0.0"
   },
   "peerDependencies": {
     "ep_etherpad-lite": ">=1.8.6"
