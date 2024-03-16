@@ -82,12 +82,11 @@ jobs:
           pnpm link --global ep_etherpad-lite
       -
         name: Run the backend tests
-        continue-on-error: true
         working-directory: ./etherpad-lite
         run: |
-          find .. -path "./node_modules/ep_*/static/tests/backend/specs/**" | grep .
-          if [ $? -eq 0 ]; then
-          pnpm run test
+          res=find .. -path "./node_modules/ep_*/static/tests/backend/specs/**" | wc -l
+          if [ $res -eq 0 ]; then
+          echo "No backend tests found"
           else
-          echo "Path not found"
+          pnpm run test
           fi
