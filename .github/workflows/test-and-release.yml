@@ -9,15 +9,8 @@ jobs:
   frontend:
     uses: ./.github/workflows/frontend-tests.yml
     secrets: inherit
-  release-main:
+  release:
     if: ${{ github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main' }}
-    needs:
-      - backend
-      - frontend
-    uses: ./.github/workflows/npmpublish.yml
-    secrets: inherit
-  release-master:
-    if: ${{ github.ref == 'refs/heads/main'}}
     needs:
       - backend
       - frontend
