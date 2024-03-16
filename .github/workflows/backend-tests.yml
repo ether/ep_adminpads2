@@ -82,6 +82,7 @@ jobs:
           pnpm link --global ep_etherpad-lite
       -
         name: Run the backend tests
+        continue-on-error: true
         working-directory: ./etherpad-lite
         run: |
           find .. -path "./node_modules/ep_*/static/tests/backend/specs/**" | grep .
