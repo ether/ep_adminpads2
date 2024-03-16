@@ -83,4 +83,10 @@ jobs:
       -
         name: Run the backend tests
         working-directory: ./etherpad-lite
-        run: pnpm run test
+        run: |
+          find .. -path "./node_modules/ep_*/static/tests/backend/specs/**" -print -quit
+          if [ $? -eq 0 ]; then
+          pnpm run test
+          else
+          echo "Path not found"
+          fi
