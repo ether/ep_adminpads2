@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Ajam",
+			"Darafsh"
+		]
+	},
+	"ep_adminpads2_action": "اقدام",
+	"ep_adminpads2_delete.value": "حذف",
+	"ep_adminpads2_last-edited": "آخرین ویرایش",
+	"ep_adminpads2_loading": "در حال بارگیری...",
+	"ep_adminpads2_manage-pads": "مدیریت برچسب‌ها",
+	"ep_adminpads2_no-results": "بدون نتیجه",
+	"ep_adminpads2_search-box.placeholder": "جستجوی عبارت",
+	"ep_adminpads2_search-button.value": "جستجو"
+}
