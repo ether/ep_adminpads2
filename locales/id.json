@@ -1,0 +1,28 @@
+{
+	"@metadata": {
+		"authors": [
+			"Atriwidada",
+			"Veracious"
+		]
+	},
+	"ep_adminpads2_action": "Tindakan",
+	"ep_adminpads2_autoupdate-label": "Perbarui otomatis saat pad berubah",
+	"ep_adminpads2_autoupdate.title": "Memfungsikan atau menonaktifkan pembaruan otomatis bagi kuiri saat ini.",
+	"ep_adminpads2_confirm": "Anda yakin hendak menghapus pad {{padID}}?",
+	"ep_adminpads2_delete.value": "Hapus",
+	"ep_adminpads2_last-edited": "Terakhir disunting",
+	"ep_adminpads2_loading": "Memuat…",
+	"ep_adminpads2_manage-pads": "Kelola pad",
+	"ep_adminpads2_no-results": "Tidak ada hasil",
+	"ep_adminpads2_pad-user-count": "Cacah pengguna pad",
+	"ep_adminpads2_padname": "Nama pad",
+	"ep_adminpads2_search-box.placeholder": "Istilah yang dicari",
+	"ep_adminpads2_search-button.value": "Cari",
+	"ep_adminpads2_search-done": "Pencarian selesai",
+	"ep_adminpads2_search-error-explanation": "Server menemui galat ketika mencari pad:",
+	"ep_adminpads2_search-error-title": "Gagal memperoleh daftar pad",
+	"ep_adminpads2_search-heading": "Cari pad",
+	"ep_adminpads2_title": "Administrasi pad",
+	"ep_adminpads2_unknown-error": "Galat tidak dikenal",
+	"ep_adminpads2_unknown-status": "Status tidak diketahui"
+}
