@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"Умар"
+		]
+	},
+	"ep_adminpads2_action": "Ардам",
+	"ep_adminpads2_delete.value": "ДӀайаккха",
+	"ep_adminpads2_last-edited": "ТӀаьххьара хийцам",
+	"ep_adminpads2_loading": "Чуйолуш...",
+	"ep_adminpads2_manage-pads": "Документашна урхалладар",
+	"ep_adminpads2_no-results": "Цхьа а жамӀ дац",
+	"ep_adminpads2_search-button.value": "Лаха",
+	"ep_adminpads2_search-done": "Лахар чекхдаьккхина"
+}
